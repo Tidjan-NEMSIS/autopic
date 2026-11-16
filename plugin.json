@@ -1,0 +1,17 @@
+{
+  "name": "undraw",
+  "displayName": "unDraw SVG Illustrations",
+  "description": "Search, download, colorize, and integrate unDraw.co open-source SVG illustrations into web and mobile projects. Supports keyword search, primary color customization, and automatic React/Next.js component generation.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Custom Plugin",
+    "url": "https://undraw.co"
+  },
+  "homepage": "https://undraw.co",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Find an unDraw illustration for a 404 error page",
+    "Add an unDraw hero illustration about teamwork with my brand color #6C63FF",
+    "Search unDraw for illustrations related to 'data analytics' and create a React component"
+  ]
+}
