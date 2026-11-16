@@ -1,10 +1,13 @@
 <div align="center">
 
-# 🎨 unDraw Plugin for Antigravity IDE
+# 🎨 tdj-undraw
 
-**Search, download, colorize, and auto-integrate [unDraw.co](https://undraw.co) SVG illustrations — directly from your AI agent.**
+**Universal unDraw.co SVG Illustration Plugin for AI Coding Agents**  
+*Google Antigravity IDE • Claude Code • Cursor • DeepSeek IDE • Windsurf*
 
-[![Antigravity Plugin](https://img.shields.io/badge/Antigravity-Plugin-6C63FF?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+)](https://antigravity.google)
+[![Antigravity](https://img.shields.io/badge/Antigravity-Plugin-6C63FF?style=for-the-badge&logo=google)](https://antigravity.google)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-Compatible-D97706?style=for-the-badge&logo=anthropic)](https://anthropic.com)
+[![Cursor](https://img.shields.io/badge/Cursor-Rules%20Included-000000?style=for-the-badge)](https://cursor.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
 [![unDraw](https://img.shields.io/badge/unDraw-600%2B%20illustrations-FF6B6B?style=for-the-badge)](https://undraw.co)
 
@@ -12,159 +15,107 @@
 
 ---
 
-## ⚡ Installation — One Command
+## ⚡ Quick Install
 
+### 1. In Google Antigravity IDE
+Install in **one command** for all your projects:
 ```bash
-agy plugin install https://github.com/Tidjan-Sow/antigravity-undraw-plugin
+agy plugin install https://github.com/Tidjan-NEMSIS/tdj-undraw
 ```
 
-That's it. The plugin is immediately active in **all your projects**.
+### 2. In Claude Code
+```bash
+claude plugin install https://github.com/Tidjan-NEMSIS/tdj-undraw
+```
+*(Or clone into `~/.claude/plugins/tdj-undraw`)*
+
+### 3. In Cursor / DeepSeek IDE / Windsurf / Copilot
+Clone into your project or global rules:
+```bash
+# Add to current project:
+git clone https://github.com/Tidjan-NEMSIS/tdj-undraw .agents/plugins/tdj-undraw
+```
+The included `AGENTS.md` and `.cursorrules` are automatically detected by DeepSeek, Cursor, and Windsurf!
 
 ---
 
-## 🤖 What It Does
+## 🤖 How It Works
 
-Once installed, the Antigravity AI agent **automatically suggests** unDraw illustrations when you're building UI that needs them:
+Once installed, your AI agent **proactively recognizes** when you need an illustration and takes care of the whole workflow:
 
-| Situation | The agent will... |
+| Need | What the Agent Does Automatically |
 |---|---|
-| 🚫 Empty state (no data) | Search & propose matching illustrations |
-| 🔴 Error page (404, 500) | Download the SVG and integrate it |
-| 👋 Onboarding / Welcome | Customize colors to match your brand |
-| 🏠 Hero section | Generate a React/Next.js component |
-| 🔐 Login / Signup page | Insert the illustration with proper a11y |
+| 🚫 **Empty state** (no data, 0 search results) | Searches unDraw, downloads matching SVG |
+| 🔴 **404 / 500 error pages** | Integrates error illustration, customizes text |
+| 👋 **Onboarding / Welcome screens** | Finds onboarding graphics, adapts brand tone |
+| 🏠 **Hero sections** | Downloads illustration, sets responsive sizing |
+| 🎨 **Brand match** | Replaces `#6C63FF` with **your project's hex color** |
+| ⚛️ **Component ready** | Generates React / Next.js / Vue / Flutter code |
 
-### Example Conversation
+---
 
-```
-You:   "I need a 404 error page for my Next.js app"
+## 💬 Example Prompt
 
-Agent: I'll use an unDraw illustration for this. What's your brand color?
+```text
+You:   "Crée-moi une page 404 propre avec une illustration pour mon app Next.js"
 
-You:   "#3B82F6"
-
-Agent: ✅ Downloaded "page-not-found" illustration
-       ✅ Colorized with #3B82F6
-       ✅ Created components/illustrations/PageNotFound.tsx
-       ✅ Created app/not-found.tsx with the illustration
+Agent: 🔍 Recherche d'illustrations d'erreur sur unDraw...
+       ✅ Trouvé : "page-not-found"
+       🎨 Colorisation avec votre couleur primaire (#3B82F6)
+       📦 Sauvegardé dans public/illustrations/page-not-found.svg
+       ⚛️ Composant React créé dans app/not-found.tsx !
 ```
 
 ---
 
-## 🔍 Features
+## 🛠️ Included CLI Scripts
 
-### 1. Smart Search
-The agent searches unDraw's 600+ illustration library by keyword:
+You can also run the scripts directly from the terminal:
+
+### 🔍 Search illustrations (live unDraw API)
 ```bash
-# Used internally by the agent, but you can also run it manually:
-python skills/undraw/scripts/undraw_search.py -q "teamwork" -l 5 --json
+python scripts/undraw_search.py -q "teamwork" -l 5 --json
 ```
 
-### 2. Brand Color Customization
-Automatically replaces unDraw's default purple (`#6C63FF`) with **your** brand color:
+### ⬇️ Search and download
 ```bash
-python skills/undraw/scripts/undraw_colorize.py -i illustration.svg -c "#FF6B6B"
+python scripts/undraw_search.py -q "analytics" -l 1 --download -o ./public/illustrations
 ```
 
-### 3. React/Next.js Component Generation
-The agent generates ready-to-use components:
-
-```tsx
-// Auto-generated by the agent
-import Image from 'next/image';
-
-export const UndrawIllustration = ({ name, alt, className }) => (
-  <Image
-    src={`/illustrations/${name}.svg`}
-    alt={alt}
-    width={400}
-    height={300}
-    className={className}
-  />
-);
+### 🎨 Colorize SVG with your brand
+```bash
+python scripts/undraw_colorize.py -i ./public/illustrations/analytics.svg -c "#10B981"
 ```
 
-### 4. Offline Catalog
-Build a local cache of all 600+ illustrations for offline use:
+### 📦 Build local offline catalog (600+ SVGs)
 ```bash
-python skills/undraw/scripts/undraw_search.py --build-catalog --output ./undraw-catalog.json
+python scripts/undraw_search.py --build-catalog --output ./undraw-catalog.json
 ```
 
 ---
 
-## 📁 Plugin Structure
+## 📂 Multi-IDE Architecture
 
 ```
-antigravity-undraw-plugin/
-├── plugin.json                          # Plugin manifest
-├── assets/logo.svg                      # Plugin logo
-├── rules/AGENTS.md                      # Auto-suggestion rules
+tdj-undraw/
+├── plugin.json                 # Google Antigravity manifest
+├── .claude-plugin/plugin.json  # Claude Code plugin manifest
+├── gemini-extension.json       # Gemini CLI extension manifest
+├── AGENTS.md                   # Universal agent rule (DeepSeek, Cursor, Antigravity)
+├── CLAUDE.md                   # Claude Code instructions
+├── .cursorrules                # Cursor IDE rule
+├── assets/logo.svg             # Plugin logo
+├── scripts/                    # Portable Python automation
+│   ├── undraw_search.py        # Live search & download
+│   └── undraw_colorize.py      # SVG color customization
 └── skills/undraw/
-    ├── SKILL.md                         # Agent instructions
-    └── scripts/
-        ├── undraw_search.py             # Search & download
-        └── undraw_colorize.py           # Color customization
+    └── SKILL.md                # Antigravity skill definition
 ```
 
 ---
 
-## 🛠️ Manual Installation (Alternative)
+## 📜 License & Credits
 
-If you prefer manual setup:
-
-1. Clone this repo into your Antigravity plugins directory:
-   ```bash
-   # Windows
-   git clone https://github.com/Tidjan-Sow/antigravity-undraw-plugin %USERPROFILE%\.gemini\config\plugins\undraw
-
-   # macOS / Linux
-   git clone https://github.com/Tidjan-Sow/antigravity-undraw-plugin ~/.gemini/config/plugins/undraw
-   ```
-
-2. The plugin is automatically detected. No restart needed.
-
-3. Verify it's active:
-   ```bash
-   agy plugin list
-   ```
-
----
-
-## 🎨 Supported Use Cases
-
-The agent proactively suggests unDraw illustrations for:
-
-- **Empty states** — No data, no results, empty inbox
-- **Error pages** — 404, 500, offline, connection lost
-- **Onboarding** — Welcome screens, setup wizards
-- **Hero sections** — Landing pages, feature showcases
-- **About / Team pages** — Company culture, team profiles
-- **Loading states** — Processing, uploading, syncing
-- **Success screens** — Task complete, payment confirmed
-- **Auth pages** — Login, signup, forgot password
-
----
-
-## 📜 License
-
-This plugin is MIT licensed. 
-
-unDraw illustrations are [free for commercial and personal use](https://undraw.co/license) without attribution. You may **not** redistribute them as a competing illustration library.
-
----
-
-## 🤝 Contributing
-
-PRs welcome! Ideas for improvement:
-- [ ] Support for multiple illustration libraries (Storyset, DrawKit)
-- [ ] Dark mode auto-adaptation
-- [ ] SVG-to-React inline component converter
-- [ ] Figma integration
-
----
-
-<div align="center">
-
-**Made with 💜 by [Tidjan Sow](https://github.com/Tidjan-Sow) — powered by [Antigravity](https://antigravity.google) & [unDraw](https://undraw.co)**
-
-</div>
+- Plugin created and maintained by **[Tidjan Sow](https://github.com/Tidjan-NEMSIS)** ([@Tidjan-Sow](https://github.com/Tidjan-Sow)).
+- Illustrations by Katerina Limpitsouni on [unDraw.co](https://undraw.co) (Free for commercial and personal use).
+- Plugin code licensed under the [MIT License](LICENSE).

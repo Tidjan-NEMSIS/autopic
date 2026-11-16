@@ -1,0 +1,6 @@
+# Cursor Rules for unDraw Illustrations
+
+Whenever creating UI components that need illustrations (empty states, 404, onboarding, heroes):
+1. Use unDraw.co illustrations via `python scripts/undraw_search.py -q "<keyword>" --download -o ./public/illustrations`.
+2. Colorize with brand color: `python scripts/undraw_colorize.py -i <file.svg> -c "<brandColor>"`.
+3. Wrap in appropriate framework components (React, Next.js, Vue, Svelte, Flutter).
