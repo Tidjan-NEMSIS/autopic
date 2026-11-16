@@ -1,4 +1,5 @@
 {
+  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
   "name": "tdj-undraw",
   "displayName": "tdj-undraw (unDraw SVG for AI)",
   "description": "Universal unDraw SVG illustration plugin by Tidjan. Search, download, colorize, and auto-integrate 600+ illustrations in Antigravity, Claude Code, Cursor, DeepSeek & more.",
