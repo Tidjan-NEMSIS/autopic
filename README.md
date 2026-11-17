@@ -17,25 +17,30 @@
 
 ## ⚡ Quick Install
 
-### 1. In Google Antigravity IDE
-Install in **one command** for all your projects:
+### 🌟 Le plus rapide : via `npx` (Recommandé)
+Installe automatiquement le plugin pour **tous vos IDE** (Antigravity, Claude Code, Cursor, DeepSeek) en **1 commande** :
+```bash
+npx tdj-undraw
+```
+
+---
+
+### Ou via la commande native de votre IDE :
+
+#### 1. In Google Antigravity IDE
 ```bash
 agy plugin install https://github.com/Tidjan-NEMSIS/tdj-undraw
 ```
 
-### 2. In Claude Code
+#### 2. In Claude Code
 ```bash
 claude plugin install https://github.com/Tidjan-NEMSIS/tdj-undraw
 ```
-*(Or clone into `~/.claude/plugins/tdj-undraw`)*
 
-### 3. In Cursor / DeepSeek IDE / Windsurf / Copilot
-Clone into your project or global rules:
+#### 3. In Cursor / DeepSeek IDE / Windsurf
 ```bash
-# Add to current project:
 git clone https://github.com/Tidjan-NEMSIS/tdj-undraw .agents/plugins/tdj-undraw
 ```
-The included `AGENTS.md` and `.cursorrules` are automatically detected by DeepSeek, Cursor, and Windsurf!
 
 ---
 

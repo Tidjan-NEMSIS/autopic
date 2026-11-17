@@ -1,0 +1,51 @@
+{
+  "name": "tdj-undraw",
+  "version": "1.0.0",
+  "description": "Universal unDraw.co SVG Illustration Plugin & CLI for AI Coding Agents (Antigravity, Claude Code, Cursor, DeepSeek)",
+  "main": "bin/cli.js",
+  "bin": {
+    "tdj-undraw": "./bin/cli.js"
+  },
+  "keywords": [
+    "antigravity",
+    "antigravity-plugin",
+    "undraw",
+    "svg",
+    "illustrations",
+    "ai-agent",
+    "claude-code",
+    "cursor",
+    "deepseek",
+    "vector",
+    "nextjs",
+    "react"
+  ],
+  "author": "Tidjan Sow <tidjansow12@gmail.com> (https://github.com/Tidjan-NEMSIS)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Tidjan-NEMSIS/tdj-undraw.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Tidjan-NEMSIS/tdj-undraw/issues"
+  },
+  "homepage": "https://github.com/Tidjan-NEMSIS/tdj-undraw#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "bin",
+    "skills",
+    "rules",
+    "scripts",
+    "assets",
+    "plugin.json",
+    ".claude-plugin",
+    "gemini-extension.json",
+    "AGENTS.md",
+    "CLAUDE.md",
+    ".cursorrules",
+    "README.md",
+    "LICENSE"
+  ]
+}
