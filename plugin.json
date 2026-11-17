@@ -1,17 +1,17 @@
 {
   "$schema": "https://antigravity.google/schemas/v1/plugin.json",
-  "name": "tdj-undraw",
-  "displayName": "tdj-undraw (unDraw SVG for AI)",
+  "name": "tidjan-undraw",
+  "displayName": "tidjan-undraw (unDraw SVG for AI)",
   "description": "Universal unDraw SVG illustration plugin by Tidjan. Search, download, colorize, and auto-integrate 600+ illustrations in Antigravity, Claude Code, Cursor, DeepSeek & more.",
   "version": "1.0.0",
   "author": {
     "name": "Tidjan Sow",
     "url": "https://github.com/Tidjan-NEMSIS"
   },
-  "homepage": "https://github.com/Tidjan-NEMSIS/tdj-undraw",
+  "homepage": "https://github.com/Tidjan-NEMSIS/tidjan-undraw",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Tidjan-NEMSIS/tdj-undraw.git"
+    "url": "https://github.com/Tidjan-NEMSIS/tidjan-undraw.git"
   },
   "logo": "assets/logo.svg",
   "suggestedPrompts": [

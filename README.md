@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🎨 tdj-undraw
+# 🎨 tidjan-undraw
 
 **Universal unDraw.co SVG Illustration Plugin for AI Coding Agents**  
 *Google Antigravity IDE • Claude Code • Cursor • DeepSeek IDE • Windsurf*
@@ -20,7 +20,7 @@
 ### 🌟 Le plus rapide : via `npx` (Recommandé)
 Installe automatiquement le plugin pour **tous vos IDE** (Antigravity, Claude Code, Cursor, DeepSeek) en **1 commande** :
 ```bash
-npx tdj-undraw
+npx tidjan-undraw
 ```
 
 ---
@@ -29,17 +29,17 @@ npx tdj-undraw
 
 #### 1. In Google Antigravity IDE
 ```bash
-agy plugin install https://github.com/Tidjan-NEMSIS/tdj-undraw
+agy plugin install https://github.com/Tidjan-NEMSIS/tidjan-undraw
 ```
 
 #### 2. In Claude Code
 ```bash
-claude plugin install https://github.com/Tidjan-NEMSIS/tdj-undraw
+claude plugin install https://github.com/Tidjan-NEMSIS/tidjan-undraw
 ```
 
 #### 3. In Cursor / DeepSeek IDE / Windsurf
 ```bash
-git clone https://github.com/Tidjan-NEMSIS/tdj-undraw .agents/plugins/tdj-undraw
+git clone https://github.com/Tidjan-NEMSIS/tidjan-undraw .agents/plugins/tidjan-undraw
 ```
 
 ---
@@ -75,26 +75,16 @@ Agent: 🔍 Recherche d'illustrations d'erreur sur unDraw...
 
 ## 🛠️ Included CLI Scripts
 
-You can also run the scripts directly from the terminal:
+You can also run the scripts directly from the terminal via npx:
 
 ### 🔍 Search illustrations (live unDraw API)
 ```bash
-python scripts/undraw_search.py -q "teamwork" -l 5 --json
+npx tidjan-undraw search "teamwork"
 ```
 
 ### ⬇️ Search and download
 ```bash
-python scripts/undraw_search.py -q "analytics" -l 1 --download -o ./public/illustrations
-```
-
-### 🎨 Colorize SVG with your brand
-```bash
-python scripts/undraw_colorize.py -i ./public/illustrations/analytics.svg -c "#10B981"
-```
-
-### 📦 Build local offline catalog (600+ SVGs)
-```bash
-python scripts/undraw_search.py --build-catalog --output ./undraw-catalog.json
+npx tidjan-undraw download "analytics" ./public/illustrations "#10B981"
 ```
 
 ---
@@ -102,7 +92,7 @@ python scripts/undraw_search.py --build-catalog --output ./undraw-catalog.json
 ## 📂 Multi-IDE Architecture
 
 ```
-tdj-undraw/
+tidjan-undraw/
 ├── plugin.json                 # Google Antigravity manifest
 ├── .claude-plugin/plugin.json  # Claude Code plugin manifest
 ├── gemini-extension.json       # Gemini CLI extension manifest
@@ -110,6 +100,7 @@ tdj-undraw/
 ├── CLAUDE.md                   # Claude Code instructions
 ├── .cursorrules                # Cursor IDE rule
 ├── assets/logo.svg             # Plugin logo
+├── bin/cli.js                  # Node.js CLI & installer
 ├── scripts/                    # Portable Python automation
 │   ├── undraw_search.py        # Live search & download
 │   └── undraw_colorize.py      # SVG color customization
@@ -121,6 +112,6 @@ tdj-undraw/
 
 ## 📜 License & Credits
 
-- Plugin created and maintained by **[Tidjan Sow](https://github.com/Tidjan-NEMSIS)** ([@Tidjan-Sow](https://github.com/Tidjan-Sow)).
+- Plugin created and maintained by **[Tidjan Sow](https://github.com/Tidjan-NEMSIS)**.
 - Illustrations by Katerina Limpitsouni on [unDraw.co](https://undraw.co) (Free for commercial and personal use).
 - Plugin code licensed under the [MIT License](LICENSE).

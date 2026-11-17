@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * tdj-undraw — Universal unDraw SVG Plugin & CLI for AI Coding Agents
+ * tidjan-undraw — Universal unDraw SVG Plugin & CLI for AI Coding Agents
  * Author: Tidjan Sow (https://github.com/Tidjan-NEMSIS)
  * License: MIT
  */
@@ -30,7 +30,7 @@ const colors = {
 
 function banner() {
   console.log(`
-${colors.magenta}${colors.bold}🎨 tdj-undraw${colors.reset} — ${colors.cyan}Universal unDraw SVG Plugin for AI Coding Agents${colors.reset}
+${colors.magenta}${colors.bold}🎨 tidjan-undraw${colors.reset} — ${colors.cyan}Universal unDraw SVG Plugin for AI Coding Agents${colors.reset}
 ${colors.blue}Google Antigravity • Claude Code • Cursor • DeepSeek IDE${colors.reset}
 `);
 }

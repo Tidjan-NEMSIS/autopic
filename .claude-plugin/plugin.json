@@ -1,10 +1,10 @@
 {
-  "name": "tdj-undraw",
+  "name": "tidjan-undraw",
   "description": "unDraw SVG illustration integration for Claude Code by Tidjan. Search, download, colorize, and auto-integrate 600+ illustrations.",
   "version": "1.0.0",
   "author": {
     "name": "Tidjan Sow",
     "url": "https://github.com/Tidjan-NEMSIS"
   },
-  "homepage": "https://github.com/Tidjan-NEMSIS/tdj-undraw"
+  "homepage": "https://github.com/Tidjan-NEMSIS/tidjan-undraw"
 }
