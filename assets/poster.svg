@@ -1,0 +1,217 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <defs>
+    <!-- Background Gradients -->
+    <radialGradient id="bgGlow" cx="20%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#4F46E5" stop-opacity="0.25"/>
+      <stop offset="60%" stop-color="#0F172A" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#030712" stop-opacity="1"/>
+    </radialGradient>
+    <radialGradient id="emeraldGlow" cx="80%" cy="70%" r="50%">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#030712" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Glass Terminal Filter -->
+    <linearGradient id="terminalBorder" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6366F1" stop-opacity="0.6"/>
+      <stop offset="50%" stop-color="#3B82F6" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#10B981" stop-opacity="0.4"/>
+    </linearGradient>
+
+    <linearGradient id="cardGrad1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1E293B" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0.9"/>
+    </linearGradient>
+
+    <!-- Glow Drop Shadow -->
+    <filter id="dropShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+    <filter id="neonShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="12" flood-color="#6366F1" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="675" fill="#030712"/>
+  <rect width="1200" height="675" fill="url(#bgGlow)"/>
+  <rect width="1200" height="675" fill="url(#emeraldGlow)"/>
+
+  <!-- Subtle Cyber Grid -->
+  <g opacity="0.07" stroke="#94A3B8" stroke-width="1">
+    <line x1="0" y1="135" x2="1200" y2="135"/>
+    <line x1="0" y1="270" x2="1200" y2="270"/>
+    <line x1="0" y1="405" x2="1200" y2="405"/>
+    <line x1="0" y1="540" x2="1200" y2="540"/>
+    <line x1="240" y1="0" x2="240" y2="675"/>
+    <line x1="480" y1="0" x2="480" y2="675"/>
+    <line x1="720" y1="0" x2="720" y2="675"/>
+    <line x1="960" y1="0" x2="960" y2="675"/>
+  </g>
+
+  <!-- HEADER BRANDING -->
+  <g transform="translate(80, 50)">
+    <!-- Logo Icon -->
+    <rect x="0" y="0" width="48" height="48" rx="14" fill="#4F46E5" filter="url(#neonShadow)"/>
+    <circle cx="24" cy="24" r="14" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+    <circle cx="24" cy="24" r="6" fill="#10B981"/>
+
+    <!-- App Name -->
+    <text x="64" y="34" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="32" font-weight="900" fill="#FFFFFF" letter-spacing="-0.5">
+      AUTOPIC
+    </text>
+    <rect x="210" y="14" width="64" height="24" rx="12" fill="#10B981" fill-opacity="0.2"/>
+    <text x="242" y="30" font-family="monospace" font-size="12" font-weight="700" fill="#34D399" text-anchor="middle">v2.0</text>
+    <text x="290" y="32" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="500" fill="#94A3B8">
+      Par Tidjan Sow
+    </text>
+  </g>
+
+  <!-- PUNCHLINE HEADLINE -->
+  <g transform="translate(80, 135)">
+    <text x="0" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="38" font-weight="800" fill="#F8FAFC" letter-spacing="-1">
+      Fini la corvée des illustrations pour vos apps.
+    </text>
+    <text x="0" y="36" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="400" fill="#94A3B8">
+      L'IA détecte votre palette, score les catalogues et génère le composant clé en main.
+    </text>
+  </g>
+
+  <!-- LEFT: SLEEK TERMINAL CLI -->
+  <g transform="translate(80, 210)" filter="url(#dropShadow)">
+    <!-- Terminal Outer Frame -->
+    <rect x="0" y="0" width="580" height="390" rx="16" fill="#0B1120" stroke="url(#terminalBorder)" stroke-width="1.5"/>
+
+    <!-- Terminal Header Bar -->
+    <rect x="0" y="0" width="580" height="42" rx="16" fill="#111827"/>
+    <line x1="0" y1="42" x2="580" y2="42" stroke="#1F2937" stroke-width="1"/>
+    <!-- Window controls -->
+    <circle cx="24" cy="21" r="6" fill="#EF4444"/>
+    <circle cx="44" cy="21" r="6" fill="#F59E0B"/>
+    <circle cx="64" cy="21" r="6" fill="#10B981"/>
+    <text x="290" y="26" font-family="monospace" font-size="12" fill="#64748B" text-anchor="middle">bash — 80x24</text>
+
+    <!-- Terminal Body Content -->
+    <g transform="translate(24, 75)" font-family="Consolas, Monaco, 'Courier New', monospace" font-size="14">
+      <!-- Command prompt -->
+      <text x="0" y="0" fill="#64748B">$ </text>
+      <text x="18" y="0" fill="#38BDF8" font-weight="700">npx </text>
+      <text x="54" y="0" fill="#F8FAFC" font-weight="700">tidjan-autopic </text>
+      <text x="195" y="0" fill="#A855F7" font-weight="700">smart </text>
+      <text x="248" y="0" fill="#34D399">"page not found"</text>
+
+      <!-- Logs -->
+      <text x="0" y="35" fill="#A855F7">🧠 [Smart Match] </text>
+      <text x="145" y="35" fill="#94A3B8">Analyse contextuelle du projet...</text>
+
+      <text x="12" y="65" fill="#64748B">├── Framework : </text>
+      <text x="145" y="65" fill="#38BDF8">Next.js 16 (App Router)</text>
+
+      <text x="12" y="90" fill="#64748B">├── Palette   : </text>
+      <text x="145" y="90" fill="#10B981">#4F46E5 </text>
+      <text x="220" y="90" fill="#64748B">(détecté via tailwind.config.ts)</text>
+
+      <text x="12" y="115" fill="#64748B">└── Thème     : </text>
+      <text x="145" y="115" fill="#F43F5E">Dark Mode Adaptatif</text>
+
+      <!-- Search results -->
+      <text x="0" y="150" fill="#F59E0B">🎯 Candidats évalués :</text>
+      <text x="12" y="175" fill="#F8FAFC">1. 404 Lost in Space </text>
+      <text x="200" y="175" fill="#10B981" font-weight="700">[RECOMMANDÉ - Score 96%]</text>
+      <text x="12" y="200" fill="#64748B">2. Character Confused </text>
+      <text x="200" y="200" fill="#64748B">[Open Peeps - Score 88%]</text>
+      <text x="12" y="225" fill="#64748B">3. Tech Glitch Scene </text>
+      <text x="200" y="225" fill="#64748B">[IRA Design - Score 82%]</text>
+
+      <!-- Success Badges -->
+      <text x="0" y="260" fill="#10B981">✔ SVG téléchargé &amp; colorisé : </text>
+      <text x="260" y="260" fill="#94A3B8">public/illustrations/404.svg</text>
+      <text x="0" y="285" fill="#10B981">✔ Composant React généré   : </text>
+      <text x="260" y="285" fill="#38BDF8">PageNotFoundIllustration.tsx</text>
+    </g>
+  </g>
+
+  <!-- RIGHT: FLOATING ILLUSTRATION SHOWCASE -->
+  <!-- Card 1: Main unDraw Winner -->
+  <g transform="translate(700, 190)" filter="url(#dropShadow)">
+    <rect x="0" y="0" width="420" height="210" rx="16" fill="url(#cardGrad1)" stroke="#334155" stroke-width="1.5"/>
+    <rect x="18" y="16" width="90" height="22" rx="11" fill="#4F46E5" fill-opacity="0.2"/>
+    <text x="63" y="32" font-family="sans-serif" font-size="11" font-weight="700" fill="#818CF8" text-anchor="middle">unDraw Flat</text>
+
+    <!-- Mini stylized vector scene -->
+    <circle cx="210" cy="115" r="50" fill="#4F46E5" fill-opacity="0.15"/>
+    <rect x="150" y="75" width="120" height="75" rx="8" fill="#1E293B" stroke="#4F46E5" stroke-width="2"/>
+    <text x="210" y="122" font-family="monospace" font-size="32" font-weight="900" fill="#818CF8" text-anchor="middle">404</text>
+    <circle cx="130" cy="95" r="10" fill="#10B981"/>
+    <circle cx="290" cy="135" r="14" fill="#F43F5E" fill-opacity="0.6"/>
+
+    <text x="210" y="185" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="600" fill="#F8FAFC" text-anchor="middle">
+      Composant Next.js généré automatiquement
+    </text>
+  </g>
+
+  <!-- Card 2: Open Peeps Character -->
+  <g transform="translate(700, 425)" filter="url(#dropShadow)">
+    <rect x="0" y="0" width="200" height="175" rx="16" fill="url(#cardGrad1)" stroke="#334155" stroke-width="1.5"/>
+    <rect x="16" y="14" width="94" height="20" rx="10" fill="#10B981" fill-opacity="0.2"/>
+    <text x="63" y="28" font-family="sans-serif" font-size="11" font-weight="700" fill="#34D399" text-anchor="middle">Open Peeps</text>
+
+    <!-- Stylized Avatar -->
+    <circle cx="100" cy="90" r="32" fill="#CBD5E1"/>
+    <circle cx="92" cy="86" r="3.5" fill="#0F172A"/>
+    <circle cx="108" cy="86" r="3.5" fill="#0F172A"/>
+    <path d="M94 100 Q100 108 106 100" stroke="#0F172A" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M72 135 C72 115 128 115 128 135 Z" fill="#4F46E5"/>
+
+    <text x="100" y="152" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#E2E8F0" text-anchor="middle">
+      Avatars CC0
+    </text>
+  </g>
+
+  <!-- Card 3: IRA Design Gradient -->
+  <g transform="translate(920, 425)" filter="url(#dropShadow)">
+    <rect x="0" y="0" width="200" height="175" rx="16" fill="url(#cardGrad1)" stroke="#334155" stroke-width="1.5"/>
+    <rect x="16" y="14" width="90" height="20" rx="10" fill="#8B5CF6" fill-opacity="0.2"/>
+    <text x="61" y="28" font-family="sans-serif" font-size="11" font-weight="700" fill="#A78BFA" text-anchor="middle">IRA Design</text>
+
+    <!-- Stylized Gradient Wave -->
+    <rect x="40" y="60" width="120" height="60" rx="8" fill="url(#bgGlow)" stroke="#8B5CF6" stroke-width="1.5"/>
+    <circle cx="70" cy="90" r="14" fill="#EC4899"/>
+    <circle cx="110" cy="80" r="8" fill="#F59E0B"/>
+    <path d="M50 110 Q100 85 150 110" stroke="#38BDF8" stroke-width="3" fill="none"/>
+
+    <text x="100" y="152" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#E2E8F0" text-anchor="middle">
+      Dégradés MIT
+    </text>
+  </g>
+
+  <!-- FOOTER BADGES -->
+  <g transform="translate(80, 625)">
+    <text x="0" y="20" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="600" fill="#64748B">
+      COMPATIBLE :
+    </text>
+    <rect x="100" y="4" width="75" height="24" rx="6" fill="#1E293B"/>
+    <text x="137" y="20" font-family="sans-serif" font-size="11" font-weight="600" fill="#38BDF8" text-anchor="middle">Next.js</text>
+
+    <rect x="185" y="4" width="70" height="24" rx="6" fill="#1E293B"/>
+    <text x="220" y="20" font-family="sans-serif" font-size="11" font-weight="600" fill="#61DAFB" text-anchor="middle">React</text>
+
+    <rect x="265" y="4" width="65" height="24" rx="6" fill="#1E293B"/>
+    <text x="297" y="20" font-family="sans-serif" font-size="11" font-weight="600" fill="#42B883" text-anchor="middle">Vue 3</text>
+
+    <rect x="340" y="4" width="65" height="24" rx="6" fill="#1E293B"/>
+    <text x="372" y="20" font-family="sans-serif" font-size="11" font-weight="600" fill="#FF3E00" text-anchor="middle">Svelte</text>
+
+    <rect x="415" y="4" width="70" height="24" rx="6" fill="#1E293B"/>
+    <text x="450" y="20" font-family="sans-serif" font-size="11" font-weight="600" fill="#02569B" text-anchor="middle">Flutter</text>
+
+    <rect x="495" y="4" width="80" height="24" rx="6" fill="#1E293B"/>
+    <text x="535" y="20" font-family="sans-serif" font-size="11" font-weight="600" fill="#38BDF8" text-anchor="middle">Tailwind</text>
+
+    <!-- GitHub & npm pill -->
+    <rect x="940" y="0" width="180" height="32" rx="16" fill="#4F46E5" filter="url(#neonShadow)"/>
+    <text x="1030" y="21" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="800" fill="#FFFFFF" text-anchor="middle">
+      npm i tidjan-autopic
+    </text>
+  </g>
+</svg>
