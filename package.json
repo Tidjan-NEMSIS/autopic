@@ -4,7 +4,7 @@
   "description": "Universal unDraw.co SVG Illustration Plugin & CLI for AI Coding Agents (Antigravity, Claude Code, Cursor, DeepSeek)",
   "main": "bin/cli.js",
   "bin": {
-    "tdj-undraw": "./bin/cli.js"
+    "tdj-undraw": "bin/cli.js"
   },
   "keywords": [
     "antigravity",
@@ -24,7 +24,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Tidjan-NEMSIS/tdj-undraw.git"
+    "url": "git+https://github.com/Tidjan-NEMSIS/tdj-undraw.git"
   },
   "bugs": {
     "url": "https://github.com/Tidjan-NEMSIS/tdj-undraw/issues"
