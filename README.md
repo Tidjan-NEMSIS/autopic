@@ -1,11 +1,11 @@
 <div align="center">
 
-# 🎯 Autopik v2.0
+# 🎯 Autopic v2.0
 
 **Intelligent Multi-Provider Illustration Platform & CLI for AI Coding Agents**  
 *Google Antigravity IDE • Claude Code • Cursor • Windsurf • DeepSeek IDE*
 
-[![npm version](https://img.shields.io/npm/v/tidjan-autopik.svg?style=for-the-badge&color=CB3837&logo=npm)](https://www.npmjs.com/package/tidjan-autopik)
+[![npm version](https://img.shields.io/npm/v/tidjan-autopic.svg?style=for-the-badge&color=CB3837&logo=npm)](https://www.npmjs.com/package/tidjan-autopic)
 [![Tests Passing](https://img.shields.io/badge/Tests-40%2F40%20Pass-brightgreen?style=for-the-badge&logo=node.js)](https://nodejs.org)
 [![Zero Dependencies](https://img.shields.io/badge/Dependencies-0%20External-blue?style=for-the-badge)](package.json)
 [![Antigravity](https://img.shields.io/badge/Antigravity-v2.0_Ready-6C63FF?style=for-the-badge&logo=google)](https://antigravity.google)
@@ -14,7 +14,7 @@
 <br/>
 
 <!-- ANIMATED DEMO MOCKUP -->
-<img src="assets/demo.svg" alt="Autopik Multi-Provider Smart Match Demo" width="100%" />
+<img src="assets/demo.svg" alt="Autopic Multi-Provider Smart Match Demo" width="100%" />
 
 </div>
 
@@ -22,19 +22,17 @@
 
 ## ⚡ Quick Start (1 commande universelle)
 
-Installe et configure automatiquement **Autopik** pour **tous vos IDE** :
+Installe et configure automatiquement **Autopic** pour **tous vos IDE** :
 
 ```bash
-npx tidjan-autopik
+npx tidjan-autopic
 ```
-
-*(Ou via l'alias court : `npx autopik`)*
 
 ---
 
-## 🚀 Pourquoi Autopik ?
+## 🚀 Pourquoi Autopic ?
 
-**Autopik** (« Auto-Pick ») est un **moteur intelligent, modulaire et conforme au droit d'auteur**, capable de comprendre le contexte d'une interface, d'interroger plusieurs catalogues d'illustrations de référence (unDraw, Open Peeps, IRA Design, Storyset, DrawKit, ManyPixels), de calculer un score de pertinence multi-critères, et de générer instantanément les composants dans votre framework cible (**React**, **Next.js**, **Vue 3**, **Svelte**, **Flutter**).
+**Autopic** est un **moteur intelligent, modulaire et conforme au droit d'auteur**, capable de comprendre le contexte d'une interface, d'interroger plusieurs catalogues d'illustrations de référence (unDraw, Open Peeps, IRA Design, Storyset, DrawKit, ManyPixels), de calculer un score de pertinence multi-critères, et de générer instantanément les composants dans votre framework cible (**React**, **Next.js**, **Vue 3**, **Svelte**, **Flutter**).
 
 ### 🏛️ Matrice des Fournisseurs
 
@@ -48,11 +46,11 @@ npx tidjan-autopik
 | **ManyPixels** | ⚖️ Manual Only | ManyPixels License | Conformité stricte (Recherche guidée) | Monochromatic, Two-color, Isometric |
 
 > [!IMPORTANT]
-> **Éthique & Conformité Stricte** : Storyset, DrawKit et ManyPixels interdisent explicitement le scraping ou la redistribution automatisée en masse dans leurs CGU. Conformément aux règles d'ingénierie responsable, Autopik applique le statut `manual_only` pour ces fournisseurs : il fournit les liens officiels de recherche et les snippets d'attribution légale obligatoires sans jamais contourner les protections techniques.
+> **Éthique & Conformité Stricte** : Storyset, DrawKit et ManyPixels interdisent explicitement le scraping ou la redistribution automatisée en masse dans leurs CGU. Conformément aux règles d'ingénierie responsable, Autopic applique le statut `manual_only` pour ces fournisseurs : il fournit les liens officiels de recherche et les snippets d'attribution légale obligatoires sans jamais contourner les protections techniques.
 
 ---
 
-## 🧠 Les 6 Moteurs Cœurs d'Autopik
+## 🧠 Les 6 Moteurs Cœurs d'Autopic
 
 1. **`SearchEngine` (Analyseur Sémantique Contextuel)** :
    - Détecte automatiquement le composant cible (`auth`, `404`, `empty`, `hero`, `team`, `dashboard`).
@@ -81,40 +79,40 @@ npx tidjan-autopik
 Analyse le projet, évalue les candidats des catalogues approuvés et génère le composant clé en main :
 ```bash
 # Recherche multi-catalogue intelligente
-npx tidjan-autopik smart "page not found"
+npx tidjan-autopic smart "page not found"
 
 # Spécifier un fournisseur (ex: Open Peeps pour un personnage)
-npx tidjan-autopik smart "secure login" --provider openpeeps
+npx tidjan-autopic smart "secure login" --provider openpeeps
 
 # Forcer un framework et une couleur
-npx tidjan-autopik smart "analytics dashboard" --framework vue --color "#3B82F6"
+npx tidjan-autopic smart "analytics dashboard" --framework vue --color "#3B82F6"
 
 # Forcer le mode sombre et écraser si existant
-npx tidjan-autopik smart "server crash" --dark --force
+npx tidjan-autopic smart "server crash" --dark --force
 ```
 
 ### 2. 🔍 Recherche & Mode JSON pour Agents IA
 ```bash
 # Recherche avec scores de pertinence
-npx tidjan-autopik search "teamwork"
+npx tidjan-autopic search "teamwork"
 
 # Sortie structurée JSON consommable par les agents IA
-npx tidjan-autopik search "payment" --json
+npx tidjan-autopic search "payment" --json
 ```
 
 ### 3. 📦 Liste des Fournisseurs & Capacités
 ```bash
-npx tidjan-autopik providers
+npx tidjan-autopic providers
 ```
 
 ### 4. ⚖️ Audit Légal de Conformité
 ```bash
-npx tidjan-autopik audit
+npx tidjan-autopic audit
 ```
 
 ### 5. ⬇️ Téléchargement Direct
 ```bash
-npx tidjan-autopik download "launch rocket" ./public/illustrations --provider iradesign
+npx tidjan-autopic download "launch rocket" ./public/illustrations --provider iradesign
 ```
 
 ---
@@ -123,7 +121,7 @@ npx tidjan-autopik download "launch rocket" ./public/illustrations --provider ir
 
 Installez le package dans votre projet :
 ```bash
-npm install tidjan-autopik
+npm install tidjan-autopic
 ```
 
 Utilisez l'API typée :
@@ -133,7 +131,7 @@ import {
   integrateIllustration,
   auditLicenses,
   getProviders
-} from 'tidjan-autopik';
+} from 'tidjan-autopic';
 
 // 1. Recherche sémantique multi-fournisseurs avec scoring
 const results = await searchIllustrations('connexion sécurisée', {

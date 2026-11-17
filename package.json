@@ -1,11 +1,12 @@
 {
-  "name": "tidjan-autopik",
+  "name": "tidjan-autopic",
   "version": "2.0.0",
-  "description": "Autopik — Universal Multi-Provider Illustration Platform & CLI for AI Coding Agents (unDraw, Open Peeps, IRA Design, Storyset, DrawKit, ManyPixels)",
+  "description": "Autopic — Universal Multi-Provider Illustration Platform & CLI for AI Coding Agents (unDraw, Open Peeps, IRA Design, Storyset, DrawKit, ManyPixels)",
   "main": "src/index.js",
   "types": "src/index.d.ts",
   "bin": {
-    "autopik": "bin/cli.js",
+    "autopic": "bin/cli.js",
+    "tidjan-autopic": "bin/cli.js",
     "tidjan-autopik": "bin/cli.js",
     "tidjan-undraw": "bin/cli.js",
     "tdj-undraw": "bin/cli.js"

@@ -42,7 +42,7 @@ const colors = {
 
 function banner() {
   console.log(`
-${colors.magenta}${colors.bold}🎯 Autopik v2.0.0${colors.reset} (${colors.yellow}tidjan-autopik${colors.reset}) — ${colors.cyan}Intelligent Multi-Provider Illustration Platform for AI Agents${colors.reset}
+${colors.magenta}${colors.bold}🎯 Autopic v2.0.0${colors.reset} (${colors.yellow}tidjan-autopic${colors.reset}) — ${colors.cyan}Intelligent Multi-Provider Illustration Platform for AI Agents${colors.reset}
 ${colors.gray}Providers: unDraw (Approved) • Open Peeps (CC0) • IRA Design (MIT) • Storyset • DrawKit • ManyPixels${colors.reset}
 ${colors.gray}Compatible: Google Antigravity • Claude Code • Cursor • Windsurf • DeepSeek IDE${colors.reset}
 `);

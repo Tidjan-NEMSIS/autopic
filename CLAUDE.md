@@ -1,11 +1,11 @@
-# Autopik (tidjan-autopik) — Claude Code Instructions
+# Autopic (tidjan-autopic) — Claude Code Instructions
 
 ## Commands
 - Test suite: `npm test`
-- Multi-provider smart match: `npx tidjan-autopik smart "<concept>"`
-- Search illustrations: `npx tidjan-autopik search "<query>" [--provider <id>] [--json]`
-- List providers: `npx tidjan-autopik providers`
-- Audit compliance: `npx tidjan-autopik audit`
+- Multi-provider smart match: `npx tidjan-autopic smart "<concept>"`
+- Search illustrations: `npx tidjan-autopic search "<query>" [--provider <id>] [--json]`
+- List providers: `npx tidjan-autopic providers`
+- Audit compliance: `npx tidjan-autopic audit`
 
 ## Providers
 - unDraw (`undraw`): Approved (Flat scenes)

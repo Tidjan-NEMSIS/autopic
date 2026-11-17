@@ -1,6 +1,6 @@
 {
-  "name": "autopik",
-  "description": "Autopik — Universal multi-provider illustration platform by Tidjan Sow (unDraw, Open Peeps, IRA Design, Storyset, DrawKit, ManyPixels). Search, smart-match, colorize, and auto-generate components for React, Next.js, Vue, Svelte, and Flutter.",
+  "name": "autopic",
+  "description": "Autopic — Universal multi-provider illustration platform by Tidjan Sow (unDraw, Open Peeps, IRA Design, Storyset, DrawKit, ManyPixels). Search, smart-match, colorize, and auto-generate components for React, Next.js, Vue, Svelte, and Flutter.",
   "version": "2.0.0",
   "author": {
     "name": "Tidjan Sow",

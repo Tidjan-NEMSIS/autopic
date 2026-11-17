@@ -1,7 +1,7 @@
 {
   "$schema": "https://antigravity.google/schemas/v1/plugin.json",
-  "name": "autopik",
-  "displayName": "Autopik — Intelligent Multi-Provider Illustration Platform",
+  "name": "autopic",
+  "displayName": "Autopic — Intelligent Multi-Provider Illustration Platform",
   "description": "Universal multi-provider illustration platform by Tidjan Sow (unDraw, Open Peeps, IRA Design, Storyset, DrawKit, ManyPixels). Smart Match context analysis, auto-palette detection (Tailwind/CSS), anti-duplicate caching and multi-framework generation.",
   "version": "2.0.0",
   "author": {
@@ -15,7 +15,7 @@
   },
   "logo": "assets/logo.svg",
   "suggestedPrompts": [
-    "Smart-match an illustration for a 404 error page using Autopik with my brand color",
+    "Smart-match an illustration for a 404 error page using Autopic with my brand color",
     "Find an avatar character on Open Peeps with my project palette",
     "Integrate an IRA Design tech illustration with custom gradients into Next.js"
   ]

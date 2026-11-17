@@ -1,6 +1,6 @@
 {
-  "name": "autopik",
+  "name": "autopic",
   "version": "2.0.0",
-  "description": "Autopik — Universal multi-provider illustration extension for Gemini CLI by Tidjan Sow",
+  "description": "Autopic — Universal multi-provider illustration extension for Gemini CLI by Tidjan Sow",
   "author": "Tidjan Sow"
 }
