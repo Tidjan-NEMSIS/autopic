@@ -3,7 +3,7 @@
   "name": "autopic",
   "displayName": "Autopic — Intelligent Multi-Provider Illustration Platform",
   "description": "Universal multi-provider illustration platform by Tidjan Sow (unDraw, Open Peeps, IRA Design, Storyset, DrawKit, ManyPixels). Smart Match context analysis, auto-palette detection (Tailwind/CSS), anti-duplicate caching and multi-framework generation.",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "author": {
     "name": "Tidjan Sow",
     "url": "https://github.com/Tidjan-NEMSIS"
