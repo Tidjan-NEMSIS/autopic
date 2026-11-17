@@ -1,7 +1,7 @@
-# unDraw SVG Integration for Claude Code
+# unDraw SVG Integration for Claude Code (v1.1.0)
 
-When the user asks for illustrations, empty states, 404 pages, hero graphics, or icons:
-
-- Search unDraw: `python scripts/undraw_search.py -q "<keyword>" -l 3 --download -o ./public/illustrations`
-- Colorize to match brand: `python scripts/undraw_colorize.py -i <path_to_svg> -c "#HEX_COLOR"`
-- Create clean React / Next.js / HTML components wrapping the SVG.
+When illustrations, 404 pages, empty states, or hero graphics are needed:
+- Run smart match: `npx tidjan-undraw smart "<concept>"`
+- Automatic palette detection from Tailwind / CSS variables
+- Anti-duplicate cache in `./public/illustrations`
+- Responsive components with dark mode support

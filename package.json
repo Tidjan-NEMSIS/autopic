@@ -1,7 +1,7 @@
 {
   "name": "tidjan-undraw",
-  "version": "1.0.0",
-  "description": "Universal unDraw.co SVG Illustration Plugin & CLI for AI Coding Agents (Antigravity, Claude Code, Cursor, DeepSeek)",
+  "version": "1.1.0",
+  "description": "Universal unDraw.co SVG Illustration Plugin & CLI for AI Coding Agents with Smart Match & Auto-Palette (Antigravity, Claude Code, Cursor, DeepSeek)",
   "main": "bin/cli.js",
   "bin": {
     "tidjan-undraw": "bin/cli.js",
@@ -19,7 +19,10 @@
     "deepseek",
     "vector",
     "nextjs",
-    "react"
+    "react",
+    "tailwind",
+    "dark-mode",
+    "smart-match"
   ],
   "author": "Tidjan Sow <tidjansow12@gmail.com> (https://github.com/Tidjan-NEMSIS)",
   "license": "MIT",

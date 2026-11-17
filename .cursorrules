@@ -1,6 +1,6 @@
-# Cursor Rules for unDraw Illustrations
+# Cursor Rules for unDraw Illustrations (v1.1.0)
 
-Whenever creating UI components that need illustrations (empty states, 404, onboarding, heroes):
-1. Use unDraw.co illustrations via `python scripts/undraw_search.py -q "<keyword>" --download -o ./public/illustrations`.
-2. Colorize with brand color: `python scripts/undraw_colorize.py -i <file.svg> -c "<brandColor>"`.
-3. Wrap in appropriate framework components (React, Next.js, Vue, Svelte, Flutter).
+When creating UI components that need illustrations (empty states, 404, onboarding, heroes):
+1. Run `npx tidjan-undraw smart "<concept>"` to automatically detect brand colors from Tailwind/CSS, rank candidate illustrations, download SVG, and generate components.
+2. Anti-duplicate caching is active: existing SVGs are preserved unless `--force` is used.
+3. Dark mode adaptation is built-in.
