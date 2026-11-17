@@ -155,6 +155,28 @@ class LicenseManager {
   }
 
   /**
+   * Get structured attribution details
+   * @param {string|Object} providerOrLicense
+   * @param {string} [name]
+   * @returns {{ required: boolean, notice: string, htmlSnippet: string, markdownSnippet: string }}
+   */
+  static getAttribution(providerOrLicense, name = '') {
+    const providerId = typeof providerOrLicense === 'string'
+      ? providerOrLicense
+      : (providerOrLicense?.id || '');
+    const lic = providerId ? this.getLicense(providerId) : (providerOrLicense || {});
+    const required = Boolean(lic.attributionRequired);
+    const notice = lic.attributionSnippet || (required ? `Illustration provided by ${name || 'author'}` : '');
+
+    return {
+      required,
+      notice,
+      htmlSnippet: notice ? `<!-- Attribution: ${notice} -->` : '',
+      markdownSnippet: notice ? `*Attribution: ${notice}*` : '',
+    };
+  }
+
+  /**
    * Return a full compliance audit of all providers
    * @returns {Array<{ providerId: string, status: import('./types').ProviderStatus, license: string, automated: boolean, attribution: boolean }>}
    */

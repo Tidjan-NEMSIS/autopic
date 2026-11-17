@@ -78,24 +78,54 @@ class UndrawProvider extends BaseIllustrationProvider {
   /**
    * Fetch illustration details
    * @param {string} id
+   * @param {string} [knownUrl]
    * @returns {Promise<import('../core/types').IllustrationDetails>}
    */
-  async getIllustration(id) {
+  async getIllustration(id, knownUrl = null) {
     const rawId = id.replace(/^undraw:/, '');
-    const svgUrl = `https://cdn.undraw.co/illustration/${rawId}.svg`;
-
-    const res = await fetch(svgUrl, { signal: AbortSignal.timeout(15000) });
-    if (!res.ok) {
-      throw new Error(`Illustration not found on unDraw CDN (${res.status}): ${rawId}`);
+    
+    // Candidate CDN URLs to try in order (handles both /illustrations/ and /illustration/ paths)
+    const candidateUrls = [];
+    if (knownUrl && typeof knownUrl === 'string' && knownUrl.startsWith('http')) {
+      candidateUrls.push(knownUrl);
     }
-    const rawSvg = await res.text();
+    candidateUrls.push(`https://cdn.undraw.co/illustrations/${rawId}.svg`);
+    candidateUrls.push(`https://cdn.undraw.co/illustration/${rawId}.svg`);
+    candidateUrls.push(`https://42f2671d685f51e10fc6-b97432242619da7e9ee49640879d8cd8.ssl.cf2.rackcdn.com/${rawId}.svg`);
+
+    let rawSvg = null;
+    let successfulUrl = null;
+    let lastStatus = 404;
+
+    for (const url of candidateUrls) {
+      try {
+        const res = await fetch(url, {
+          headers: {
+            'User-Agent': 'Mozilla/5.0 tidjan-autopic',
+            'Referer': 'https://undraw.co/illustrations',
+          },
+          signal: AbortSignal.timeout(10000),
+        });
+        if (res.ok) {
+          rawSvg = await res.text();
+          successfulUrl = url;
+          break;
+        } else {
+          lastStatus = res.status;
+        }
+      } catch (_) {}
+    }
+
+    if (!rawSvg) {
+      throw new Error(`Illustration not found on unDraw CDN (${lastStatus}): ${rawId}`);
+    }
 
     return {
       ...this.normalizeResult({
         id: rawId,
         title: rawId.split('_')[0].replace(/-/g, ' '),
         slug: rawId,
-        svgUrl,
+        svgUrl: successfulUrl,
       }),
       rawSvg,
       defaultPrimaryColor: this.defaultPrimaryColor,
@@ -131,7 +161,7 @@ class UndrawProvider extends BaseIllustrationProvider {
       };
     }
 
-    const details = await this.getIllustration(rawId);
+    const details = await this.getIllustration(rawId, options.url || options.svgUrl || options.media);
     let svg = details.rawSvg || '';
 
     // Color customization

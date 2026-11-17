@@ -88,7 +88,8 @@ function getNamedArg(flag, alias) {
 // 1. COMMAND: SMART MATCH (Flagship Feature)
 // -------------------------------------------------------------
 async function handleSmart() {
-  const query = args[1] && !args[1].startsWith('-') ? args[1] : 'page not found';
+  const rawQuery = args[1] && !args[1].startsWith('-') ? args[1] : 'page not found';
+  const query = rawQuery.replace(/^<+|>+$/g, '').trim() || 'page not found';
   const force = args.includes('--force');
   const customColor = getNamedArg('--color', '-c');
   const forceDark = args.includes('--dark');
@@ -165,6 +166,7 @@ async function handleSmart() {
       id: winner.id,
       slug: winner.slug,
       title: winner.title,
+      url: winner.svgUrl || winner.media,
       framework,
       cwd,
       primaryColor: primary,
@@ -204,7 +206,8 @@ async function handleSmart() {
 // 2. COMMAND: SEARCH
 // -------------------------------------------------------------
 async function handleSearch() {
-  const query = args[1] && !args[1].startsWith('-') ? args[1] : null;
+  const rawQuery = args[1] && !args[1].startsWith('-') ? args[1] : null;
+  const query = rawQuery ? rawQuery.replace(/^<+|>+$/g, '').trim() : null;
   const jsonMode = args.includes('--json');
   const requestedProvider = getNamedArg('--provider', '-p');
 
@@ -245,7 +248,8 @@ async function handleSearch() {
 // 3. COMMAND: DOWNLOAD
 // -------------------------------------------------------------
 async function handleDownload() {
-  const queryOrId = args[1] && !args[1].startsWith('-') ? args[1] : null;
+  const rawTarget = args[1] && !args[1].startsWith('-') ? args[1] : null;
+  const queryOrId = rawTarget ? rawTarget.replace(/^<+|>+$/g, '').trim() : null;
   const outDir = args[2] && !args[2].startsWith('-') ? args[2] : './public/illustrations';
   const customColor = getNamedArg('--color', '-c');
   const requestedProvider = getNamedArg('--provider', '-p') || 'undraw';

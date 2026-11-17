@@ -1,6 +1,6 @@
 {
   "name": "tidjan-autopic",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Autopic — Universal Multi-Provider Illustration Platform & CLI for AI Coding Agents (unDraw, Open Peeps, IRA Design, Storyset, DrawKit, ManyPixels)",
   "main": "src/index.js",
   "types": "src/index.d.ts",

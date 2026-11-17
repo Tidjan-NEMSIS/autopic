@@ -136,6 +136,7 @@ async function integrateIllustration(params) {
       accentColor: params.accentColor,
       isDarkMode: params.isDarkMode,
       title: params.title,
+      url: params.url || params.svgUrl,
     });
     content = asset.content;
     if (!slug) slug = `${params.providerId}-${params.id}`;
