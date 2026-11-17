@@ -1,16 +1,23 @@
 {
   "name": "tidjan-undraw",
-  "version": "1.1.0",
-  "description": "Universal unDraw.co SVG Illustration Plugin & CLI for AI Coding Agents with Smart Match & Auto-Palette (Antigravity, Claude Code, Cursor, DeepSeek)",
-  "main": "bin/cli.js",
+  "version": "2.0.0",
+  "description": "Universal Multi-Provider Illustration Platform & CLI for AI Coding Agents (unDraw, Open Peeps, IRA Design, Storyset, DrawKit, ManyPixels)",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
   "bin": {
     "tidjan-undraw": "bin/cli.js",
     "tdj-undraw": "bin/cli.js"
+  },
+  "scripts": {
+    "test": "node --test tests/**/*.test.js"
   },
   "keywords": [
     "antigravity",
     "antigravity-plugin",
     "undraw",
+    "openpeeps",
+    "iradesign",
+    "multi-provider",
     "svg",
     "illustrations",
     "ai-agent",
@@ -20,6 +27,9 @@
     "vector",
     "nextjs",
     "react",
+    "vue",
+    "svelte",
+    "flutter",
     "tailwind",
     "dark-mode",
     "smart-match"
@@ -39,6 +49,7 @@
   },
   "files": [
     "bin",
+    "src",
     "skills",
     "rules",
     "scripts",

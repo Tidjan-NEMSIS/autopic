@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 /**
- * tidjan-undraw — Universal unDraw SVG Plugin & CLI for AI Coding Agents
+ * tidjan-undraw — Universal Multi-Provider SVG Illustration Platform & CLI for AI Coding Agents
  * Author: Tidjan Sow (https://github.com/Tidjan-NEMSIS)
- * Version: 1.1.0 (Smart Match, Auto-Palette, Anti-Duplicate & Dark Mode)
+ * Version: 2.0.0 (Multi-Provider, Semantic Scoring, Multi-Framework, Anti-Duplicate & Dark Mode)
  * License: MIT
  */
 
@@ -11,9 +11,19 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
-const PKG_ROOT = path.resolve(__dirname, '..');
-const UNDRAW_API = 'https://undraw.co/api/search';
+const {
+  registry,
+  searchIllustrations,
+  downloadIllustration,
+  customizeIllustration,
+  integrateIllustration,
+  getProviders,
+  auditLicenses,
+  SearchEngine,
+  IntegrationEngine,
+} = require('../src/index');
 
+const PKG_ROOT = path.resolve(__dirname, '..');
 const args = process.argv.slice(2);
 const command = args[0] || 'install';
 
@@ -32,15 +42,16 @@ const colors = {
 
 function banner() {
   console.log(`
-${colors.magenta}${colors.bold}🎨 tidjan-undraw v1.1.0${colors.reset} — ${colors.cyan}Universal unDraw SVG Plugin for AI Coding Agents${colors.reset}
-${colors.gray}Google Antigravity • Claude Code • Cursor • DeepSeek IDE • Windsurf${colors.reset}
+${colors.magenta}${colors.bold}🎨 tidjan-undraw v2.0.0${colors.reset} — ${colors.cyan}Universal Multi-Provider Illustration Platform for AI Agents${colors.reset}
+${colors.gray}Providers: unDraw (Approved) • Open Peeps (CC0) • IRA Design (MIT) • Storyset • DrawKit • ManyPixels${colors.reset}
+${colors.gray}Compatible: Google Antigravity • Claude Code • Cursor • Windsurf • DeepSeek IDE${colors.reset}
 `);
 }
 
 function copyRecursiveSync(src, dest) {
   const srcResolved = path.resolve(src);
   const destResolved = path.resolve(dest);
-  if (destResolved.startsWith(srcResolved + path.sep)) return; // Prevent infinite loop copying into self
+  if (destResolved.startsWith(srcResolved + path.sep)) return;
 
   const base = path.basename(src);
   if (base === '.git' || base === 'node_modules' || base === '.agents' || base === '.antigravity_memory.md') return;
@@ -61,339 +72,298 @@ function copyRecursiveSync(src, dest) {
   }
 }
 
-// -------------------------------------------------------------
-// 1. AUTO-DÉTECTION COULEUR & THEME DU PROJET (CSS / TAILWIND)
-// -------------------------------------------------------------
-function detectProjectContext(cwd = process.cwd()) {
-  let primaryColor = '#6C63FF'; // Default unDraw purple
-  let colorSource = 'défaut unDraw';
-  let hasDarkMode = false;
-  let framework = 'Inconnu';
-
-  // Detect Framework
-  const pkgPath = path.join(cwd, 'package.json');
-  if (fs.existsSync(pkgPath)) {
-    try {
-      const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
-      const deps = { ...pkg.dependencies, ...pkg.devDependencies };
-      if (deps['next']) {
-        const hasAppDir = fs.existsSync(path.join(cwd, 'app')) || fs.existsSync(path.join(cwd, 'src', 'app'));
-        framework = hasAppDir ? 'Next.js (App Router)' : 'Next.js (Pages Router)';
-      } else if (deps['react']) {
-        framework = deps['vite'] ? 'React (Vite)' : 'React';
-      } else if (deps['vue'] || deps['nuxt']) {
-        framework = deps['nuxt'] ? 'Nuxt' : 'Vue';
-      } else if (deps['svelte']) {
-        framework = 'Svelte';
-      }
-    } catch (_) {}
-  }
-
-  // 1. Check Tailwind configs
-  const tailwindFiles = [
-    'tailwind.config.ts',
-    'tailwind.config.js',
-    'tailwind.config.mjs',
-    'tailwind.config.cjs',
-  ];
-  for (const f of tailwindFiles) {
-    const fullPath = path.join(cwd, f);
-    if (fs.existsSync(fullPath)) {
-      const content = fs.readFileSync(fullPath, 'utf8');
-      if (content.includes("darkMode") || content.includes("'class'") || content.includes('"class"')) {
-        hasDarkMode = true;
-      }
-      // Look for primary hex code
-      const hexMatch = content.match(/primary['"]?\s*:\s*['"](#[0-9a-fA-F]{6})['"]/i)
-        || content.match(/['"]primary['"]?\s*:\s*\{[^}]*['"]DEFAULT['"]?\s*:\s*['"](#[0-9a-fA-F]{6})['"]/i)
-        || content.match(/brand['"]?\s*:\s*['"](#[0-9a-fA-F]{6})['"]/i);
-      if (hexMatch && hexMatch[1]) {
-        primaryColor = hexMatch[1].toUpperCase();
-        colorSource = `${f} (Tailwind)`;
-        break;
-      }
+function getNamedArg(flag, alias) {
+  for (let i = 0; i < args.length; i++) {
+    if (args[i] === flag || (alias && args[i] === alias)) {
+      return args[i + 1] && !args[i + 1].startsWith('-') ? args[i + 1] : true;
+    }
+    if (args[i].startsWith(`${flag}=`)) {
+      return args[i].slice(flag.length + 1);
     }
   }
-
-  // 2. Check CSS files (variables --primary or --brand)
-  if (colorSource === 'défaut unDraw') {
-    const cssCandidates = [
-      'app/globals.css',
-      'src/app/globals.css',
-      'styles/globals.css',
-      'src/index.css',
-      'src/App.css',
-    ];
-    for (const cssFile of cssCandidates) {
-      const fullPath = path.join(cwd, cssFile);
-      if (fs.existsSync(fullPath)) {
-        const cssContent = fs.readFileSync(fullPath, 'utf8');
-        if (cssContent.includes('.dark') || cssContent.includes('@media (prefers-color-scheme: dark)')) {
-          hasDarkMode = true;
-        }
-        const match = cssContent.match(/--(?:primary|brand|color-primary)\s*:\s*(#[0-9a-fA-F]{6})/i);
-        if (match && match[1]) {
-          primaryColor = match[1].toUpperCase();
-          colorSource = `${cssFile} (CSS variable)`;
-          break;
-        }
-      }
-    }
-  }
-
-  return { primaryColor, colorSource, hasDarkMode, framework };
+  return null;
 }
 
 // -------------------------------------------------------------
-// 2. SEARCH UNDRAW API
+// 1. COMMAND: SMART MATCH (Flagship Feature)
 // -------------------------------------------------------------
-async function searchUndraw(query, limit = 5) {
-  if (!query || query.length < 3) {
-    console.error(`${colors.red}Erreur: La recherche doit comporter au moins 3 caractères.${colors.reset}`);
-    return [];
-  }
-  const url = `${UNDRAW_API}?q=${encodeURIComponent(query)}&page=0`;
-  try {
-    const res = await fetch(url, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 tidjan-undraw-cli',
-        'Accept': 'application/json',
-      },
-    });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    return (data.results || []).slice(0, limit);
-  } catch (err) {
-    console.error(`${colors.red}Erreur lors de la recherche unDraw:${colors.reset}`, err.message);
-    return [];
-  }
-}
-
-// -------------------------------------------------------------
-// 3. COLORIZATION & THEME ADAPTATION (DARK / LIGHT)
-// -------------------------------------------------------------
-function colorizeSvg(svgContent, newColor, isDarkMode = false) {
-  let content = svgContent
-    .replace(/#6c63ff/gi, newColor)
-    .replace(/rgb\(108\s*,\s*99\s*,\s*255\)/gi, newColor);
-
-  // If dark mode is explicitly enabled, soften unDraw's heavy dark charcoal elements (#2f2e41 / #3f3d56)
-  if (isDarkMode) {
-    content = content
-      .replace(/#2f2e41/gi, '#94A3B8')
-      .replace(/#3f3d56/gi, '#CBD5E1');
-  }
-
-  return content;
-}
-
-// -------------------------------------------------------------
-// 4. DOWNLOAD WITH ANTI-DUPLICATE CACHE
-// -------------------------------------------------------------
-async function downloadSvg(url, outputPath, color = null, isDarkMode = false, force = false) {
-  if (fs.existsSync(outputPath) && !force) {
-    return { path: outputPath, cached: true };
-  }
-
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`Failed to download SVG: ${res.status}`);
-  let content = await res.text();
-  if (color) {
-    content = colorizeSvg(content, color, isDarkMode);
-  }
-  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-  fs.writeFileSync(outputPath, content, 'utf8');
-  return { path: outputPath, cached: false };
-}
-
-// -------------------------------------------------------------
-// 5. REACT / NEXT.JS COMPONENT GENERATOR
-// -------------------------------------------------------------
-function generateReactComponent(slug, title, isNext = true) {
-  const compName = slug
-    .split(/[-_]/)
-    .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
-    .join('') + 'Illustration';
-
-  if (isNext) {
-    return `import Image from 'next/image';
-import React from 'react';
-
-interface Props {
-  width?: number;
-  height?: number;
-  className?: string;
-  alt?: string;
-  priority?: boolean;
-}
-
-export const ${compName}: React.FC<Props> = ({
-  width = 400,
-  height = 300,
-  className = '',
-  alt = "${title} illustration",
-  priority = false,
-}) => (
-  <div className={\`relative inline-block \${className}\`}>
-    <Image
-      src="/illustrations/${slug}.svg"
-      alt={alt}
-      width={width}
-      height={height}
-      priority={priority}
-      className="w-full h-auto object-contain dark:brightness-110"
-    />
-  </div>
-);
-
-export default ${compName};
-`;
-  }
-
-  return `import React from 'react';
-
-interface Props {
-  width?: number | string;
-  height?: number | string;
-  className?: string;
-  alt?: string;
-}
-
-export const ${compName}: React.FC<Props> = ({
-  width = '100%',
-  height = 'auto',
-  className = '',
-  alt = "${title} illustration",
-}) => (
-  <img
-    src="/illustrations/${slug}.svg"
-    alt={alt}
-    style={{ width, height }}
-    className={\`object-contain dark:brightness-110 \${className}\`}
-  />
-);
-
-export default ${compName};
-`;
-}
-
-// -------------------------------------------------------------
-// 6. SCORING SÉMANTIQUE CANDIDATS (SMART MATCH)
-// -------------------------------------------------------------
-function computeRelevanceScore(query, candidateTitle, candidateSlug) {
-  const qWords = query.toLowerCase().split(/\s+/).filter((w) => w.length > 2);
-  const target = `${candidateTitle} ${candidateSlug}`.toLowerCase();
-  let matches = 0;
-
-  for (const w of qWords) {
-    if (target.includes(w)) matches++;
-  }
-
-  // Synonym / Context boosts
-  const syns = {
-    '404': ['not found', 'error', 'lost', 'empty', 'missing'],
-    'error': ['warning', 'failure', 'bug', 'lost', 'problem'],
-    'empty': ['no data', 'void', 'search', 'folder', 'box'],
-    'team': ['coworkers', 'collaboration', 'people', 'meeting', 'together'],
-    'login': ['auth', 'security', 'password', 'door', 'profile'],
-    'hero': ['launch', 'startup', 'rocket', 'build', 'future'],
-    'success': ['done', 'celebration', 'winner', 'trophy', 'check'],
-  };
-
-  for (const [key, list] of Object.entries(syns)) {
-    if (query.toLowerCase().includes(key)) {
-      for (const s of list) {
-        if (target.includes(s)) matches += 1.5;
-      }
-    }
-  }
-
-  const base = Math.min(99, Math.round((matches / (qWords.length || 1)) * 50) + 40);
-  return Math.max(45, base);
-}
-
-// -------------------------------------------------------------
-// COMMAND HANDLERS
-// -------------------------------------------------------------
-
-// Command: smart (Flagship feature)
 async function handleSmart() {
-  const query = args[1] || 'page not found';
+  const query = args[1] && !args[1].startsWith('-') ? args[1] : 'page not found';
   const force = args.includes('--force');
-  const customColor = args.find((a, i) => args[i - 1] === '--color');
+  const customColor = getNamedArg('--color', '-c');
   const forceDark = args.includes('--dark');
+  const requestedProvider = getNamedArg('--provider', '-p');
+  const targetFramework = getNamedArg('--framework', '-f');
+  const jsonMode = args.includes('--json');
 
-  banner();
-  console.log(`${colors.magenta}${colors.bold}🧠 [Smart Match]${colors.reset} Analyse du contexte visuel et sémantique...`);
+  if (!jsonMode) banner();
 
-  const ctx = detectProjectContext();
-  const primary = customColor || ctx.primaryColor;
-  const isDark = forceDark || ctx.hasDarkMode;
+  const cwd = process.cwd();
+  const ctx = SearchEngine.inspectProject(cwd, query);
+  const primary = customColor || ctx.primaryColor || '#6C63FF';
+  const isDark = forceDark || ctx.theme === 'dark';
+  const framework = targetFramework || ctx.framework;
 
-  console.log(`\n${colors.bold}📊 Diagnostic du Projet :${colors.reset}`);
-  console.log(`  ${colors.gray}├── Framework :${colors.reset} ${colors.cyan}${ctx.framework}${colors.reset}`);
-  console.log(`  ${colors.gray}├── Palette   :${colors.reset} ${colors.green}${primary}${colors.reset} ${colors.gray}(détecté via ${ctx.colorSource})${colors.reset}`);
-  console.log(`  ${colors.gray}└── Thème     :${colors.reset} ${isDark ? colors.magenta + 'Dark Mode Adaptatif' : colors.blue + 'Standard Light'}${colors.reset}\n`);
+  if (!jsonMode) {
+    console.log(`${colors.magenta}${colors.bold}🧠 [Smart Match]${colors.reset} Analyse du contexte visuel et sémantique...`);
+    console.log(`\n${colors.bold}📊 Diagnostic du Projet :${colors.reset}`);
+    console.log(`  ${colors.gray}├── Framework :${colors.reset} ${colors.cyan}${framework}${colors.reset}`);
+    console.log(`  ${colors.gray}├── Composant :${colors.reset} ${colors.blue}${ctx.component}${colors.reset}`);
+    console.log(`  ${colors.gray}├── Mood      :${colors.reset} ${colors.blue}${ctx.mood}${colors.reset}`);
+    console.log(`  ${colors.gray}├── Style     :${colors.reset} ${colors.blue}${ctx.style}${colors.reset}`);
+    console.log(`  ${colors.gray}├── Palette   :${colors.reset} ${colors.green}${primary}${colors.reset} ${colors.gray}(détecté via ${ctx.colorSource})${colors.reset}`);
+    console.log(`  ${colors.gray}└── Thème     :${colors.reset} ${isDark ? colors.magenta + 'Dark Mode Adaptatif' : colors.blue + 'Standard Light'}${colors.reset}\n`);
 
-  console.log(`🔍 ${colors.bold}Recherche de candidats unDraw pour :${colors.reset} "${colors.yellow}${query}${colors.reset}"...`);
-  const candidates = await searchUndraw(query, 5);
+    console.log(`🔍 ${colors.bold}Recherche de candidats multi-fournisseurs pour :${colors.reset} "${colors.yellow}${query}${colors.reset}"...`);
+  }
+
+  const providerFilter = requestedProvider ? [requestedProvider.toLowerCase()] : ['undraw', 'openpeeps', 'iradesign'];
+  const candidates = await searchIllustrations(query, {
+    providers: providerFilter,
+    cwd,
+    limit: 6,
+  });
 
   if (candidates.length === 0) {
-    console.log(`${colors.red}Aucune illustration trouvée pour "${query}".${colors.reset}`);
+    if (jsonMode) {
+      console.log(JSON.stringify({ error: `No illustrations found for "${query}"`, candidates: [] }));
+    } else {
+      console.log(`${colors.red}Aucune illustration trouvée pour "${query}".${colors.reset}`);
+    }
     return;
   }
 
-  // Score candidates
-  const scored = candidates.map((c) => ({
-    ...c,
-    score: computeRelevanceScore(query, c.title, c.newSlug),
-  })).sort((a, b) => b.score - a.score);
+  if (jsonMode) {
+    console.log(JSON.stringify({ query, context: ctx, candidates }, null, 2));
+    return;
+  }
 
-  console.log(`\n${colors.bold}🎯 Candidats évalués :${colors.reset}`);
-  scored.forEach((s, idx) => {
+  console.log(`\n${colors.bold}🎯 Candidats multi-fournisseurs évalués :${colors.reset}`);
+  candidates.forEach((c, idx) => {
     const isWinner = idx === 0;
-    const badge = isWinner ? `${colors.green}[RECOMMANDÉ - Score ${s.score}%]${colors.reset}` : `${colors.gray}[Score ${s.score}%]${colors.reset}`;
-    console.log(`  ${idx + 1}. ${isWinner ? colors.bold : ''}${s.title}${colors.reset} ${badge}`);
-    console.log(`     Slug : ${colors.cyan}${s.newSlug}${colors.reset}`);
+    const scoreVal = c.score || c.relevanceScore || 50;
+    const badge = isWinner
+      ? `${colors.green}[RECOMMANDÉ - Score ${scoreVal}/100]${colors.reset}`
+      : `${colors.gray}[Score ${scoreVal}/100]${colors.reset}`;
+    const pTag = `${colors.magenta}[${c.providerName || c.providerId || 'Provider'}]${colors.reset}`;
+
+    console.log(`  ${idx + 1}. ${isWinner ? colors.bold : ''}${c.title}${colors.reset} ${pTag} ${badge}`);
+    console.log(`     Slug : ${colors.cyan}${c.slug}${colors.reset}`);
+    if (c.scoreBreakdown) {
+      const b = c.scoreBreakdown;
+      console.log(`     ${colors.gray}Détails: Sémantique:${b.semantic}/30 • Comp:${b.component}/25 • Style:${b.style}/15 • Couleur:${b.color}/10 • Licence:${b.license}/10${colors.reset}`);
+    }
   });
 
-  // Pick winner
-  const winner = scored[0];
-  console.log(`\n${colors.bold}✨ Sélection retenue :${colors.reset} ${colors.green}${colors.bold}${winner.title}${colors.reset} (${winner.newSlug})`);
-
-  // Download with anti-duplicate
-  const outDir = path.join(process.cwd(), 'public', 'illustrations');
-  const targetPath = path.join(outDir, `${winner.newSlug}.svg`);
+  // Winner selection
+  const winner = candidates[0];
+  console.log(`\n${colors.bold}✨ Sélection retenue :${colors.reset} ${colors.green}${colors.bold}${winner.title}${colors.reset} (${winner.slug})`);
 
   try {
-    const dl = await downloadSvg(winner.media, targetPath, primary, isDark, force);
-    if (dl.cached) {
-      console.log(`  ${colors.yellow}✔ [Anti-doublon] SVG déjà en cache local :${colors.reset} ${targetPath}`);
+    const integrateRes = await integrateIllustration({
+      providerId: winner.providerId,
+      id: winner.id,
+      slug: winner.slug,
+      title: winner.title,
+      framework,
+      cwd,
+      primaryColor: primary,
+      isDarkMode: isDark,
+      force,
+    });
+
+    if (integrateRes.svgResult.existed && !force) {
+      console.log(`  ${colors.yellow}✔ [Anti-doublon] SVG déjà présent localement :${colors.reset} ${integrateRes.svgResult.path}`);
+      console.log(`    ${colors.gray}(utilisez --force pour forcer la réécriture)${colors.reset}`);
     } else {
-      console.log(`  ${colors.green}✔ SVG téléchargé & colorisé :${colors.reset} ${targetPath}`);
+      console.log(`  ${colors.green}✔ SVG téléchargé & personnalisé :${colors.reset} ${integrateRes.svgResult.path}`);
     }
 
-    // Generate component
-    const compDir = path.join(process.cwd(), 'components', 'illustrations');
-    fs.mkdirSync(compDir, { recursive: true });
-    const isNext = ctx.framework.includes('Next');
-    const compCode = generateReactComponent(winner.newSlug, winner.title, isNext);
-    const compName = winner.newSlug
-      .split(/[-_]/)
-      .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
-      .join('') + 'Illustration';
-    const compPath = path.join(compDir, `${compName}.tsx`);
-    fs.writeFileSync(compPath, compCode, 'utf8');
+    console.log(`  ${colors.green}✔ Composant ${framework.toUpperCase()} généré :${colors.reset} ${integrateRes.componentResult.path}\n`);
 
-    console.log(`  ${colors.green}✔ Composant React généré :${colors.reset} ${compPath}\n`);
-    console.log(`${colors.bold}${colors.green}🎉 Terminé !${colors.reset} Importez-le dans votre page :`);
-    console.log(`${colors.cyan}import { ${compName} } from '@/components/illustrations/${compName}';${colors.reset}\n`);
+    if (integrateRes.attribution && integrateRes.attribution.required) {
+      console.log(`  ${colors.yellow}⚖ Mention légale obligatoire :${colors.reset} ${integrateRes.attribution.notice}`);
+    }
+
+    console.log(`${colors.bold}${colors.green}🎉 Terminé !${colors.reset} Intégrez le composant dans votre interface :`);
+    if (framework === 'next' || framework === 'react') {
+      console.log(`${colors.cyan}import { ${integrateRes.compName} } from '@/components/illustrations/${integrateRes.compName}';${colors.reset}\n`);
+    } else if (framework === 'vue') {
+      console.log(`${colors.cyan}import ${integrateRes.compName} from '@/components/illustrations/${integrateRes.compName}.vue';${colors.reset}\n`);
+    } else if (framework === 'svelte') {
+      console.log(`${colors.cyan}import ${integrateRes.compName} from '$lib/illustrations/${integrateRes.compName}.svelte';${colors.reset}\n`);
+    } else if (framework === 'flutter') {
+      console.log(`${colors.cyan}import 'package:your_app/widgets/illustrations/${integrateRes.compName}.dart';${colors.reset}\n`);
+    }
+  } catch (err) {
+    console.error(`${colors.red}Erreur d'intégration :${colors.reset}`, err.message);
+  }
+}
+
+// -------------------------------------------------------------
+// 2. COMMAND: SEARCH
+// -------------------------------------------------------------
+async function handleSearch() {
+  const query = args[1] && !args[1].startsWith('-') ? args[1] : null;
+  const jsonMode = args.includes('--json');
+  const requestedProvider = getNamedArg('--provider', '-p');
+
+  if (!query) {
+    console.log(`Usage: npx tidjan-undraw search <keyword> [--provider <id>] [--json]`);
+    return;
+  }
+
+  if (!jsonMode) banner();
+
+  const providerFilter = requestedProvider ? [requestedProvider.toLowerCase()] : ['undraw', 'openpeeps', 'iradesign'];
+  const results = await searchIllustrations(query, {
+    providers: providerFilter,
+    limit: 10,
+  });
+
+  if (jsonMode) {
+    console.log(JSON.stringify(results, null, 2));
+    return;
+  }
+
+  console.log(`🔍 Résultats pour "${colors.bold}${query}${colors.reset}" :\n`);
+  if (results.length === 0) {
+    console.log(`${colors.yellow}Aucune illustration trouvée pour "${query}".${colors.reset}`);
+    return;
+  }
+
+  results.forEach((r, idx) => {
+    const pTag = `${colors.magenta}[${r.providerName || r.providerId}]${colors.reset}`;
+    console.log(`  ${colors.green}${idx + 1}.${colors.reset} ${colors.bold}${r.title}${colors.reset} ${pTag}`);
+    console.log(`     Slug : ${colors.cyan}${r.slug}${colors.reset}`);
+    console.log(`     ID   : ${r.id}`);
+    console.log(`     Score: ${r.score || r.relevanceScore || 50}/100\n`);
+  });
+}
+
+// -------------------------------------------------------------
+// 3. COMMAND: DOWNLOAD
+// -------------------------------------------------------------
+async function handleDownload() {
+  const queryOrId = args[1] && !args[1].startsWith('-') ? args[1] : null;
+  const outDir = args[2] && !args[2].startsWith('-') ? args[2] : './public/illustrations';
+  const customColor = getNamedArg('--color', '-c');
+  const requestedProvider = getNamedArg('--provider', '-p') || 'undraw';
+  const force = args.includes('--force');
+
+  if (!queryOrId) {
+    console.log(`Usage: npx tidjan-undraw download <keyword|id> [output_dir] [--color <hex>] [--provider <id>] [--force]`);
+    return;
+  }
+
+  banner();
+  console.log(`⬇️ Téléchargement pour "${queryOrId}" (Provider: ${requestedProvider})...`);
+
+  try {
+    const results = await searchIllustrations(queryOrId, {
+      providers: [requestedProvider],
+      limit: 1,
+    });
+
+    if (results.length === 0) {
+      console.log(`${colors.yellow}Aucune illustration trouvée.${colors.reset}`);
+      return;
+    }
+
+    const item = results[0];
+    const ctx = SearchEngine.inspectProject(process.cwd(), queryOrId);
+    const color = customColor || ctx.primaryColor;
+
+    const asset = await downloadIllustration(item.providerId, item.id, {
+      primaryColor: color,
+      isDarkMode: ctx.theme === 'dark',
+    });
+
+    const target = path.join(outDir, `${item.slug}.svg`);
+    const writeRes = IntegrationEngine.writeFileSafe(target, asset.content, { force });
+
+    if (writeRes.existed && !force) {
+      console.log(`${colors.yellow}✔ [Anti-doublon] SVG déjà en cache local :${colors.reset} ${target}`);
+      console.log(`  (Utilisez --force pour forcer le retéléchargement)`);
+    } else {
+      console.log(`${colors.green}✔ SVG sauvegardé :${colors.reset} ${target}`);
+      console.log(`${colors.green}✔ Couleur appliquée :${colors.reset} ${color}`);
+    }
   } catch (err) {
     console.error(`${colors.red}Erreur :${colors.reset}`, err.message);
   }
 }
 
-// Command: install
+// -------------------------------------------------------------
+// 4. COMMAND: PROVIDERS
+// -------------------------------------------------------------
+function handleProviders() {
+  const jsonMode = args.includes('--json');
+  const providers = getProviders();
+
+  if (jsonMode) {
+    console.log(JSON.stringify(providers.map((p) => ({
+      id: p.id,
+      name: p.name,
+      status: p.status,
+      license: p.license,
+      capabilities: p.getCapabilities(),
+    })), null, 2));
+    return;
+  }
+
+  banner();
+  console.log(`${colors.bold}📦 Fournisseurs d'illustrations enregistrés :${colors.reset}\n`);
+
+  providers.forEach((p) => {
+    const isApproved = p.status === 'approved';
+    const statusBadge = isApproved
+      ? `${colors.green}[Automatisable - Approved]${colors.reset}`
+      : `${colors.yellow}[Manuel Uniquement - Compliant]${colors.reset}`;
+
+    console.log(`  ${colors.bold}${p.name}${colors.reset} (${colors.cyan}${p.id}${colors.reset}) ${statusBadge}`);
+    console.log(`    Licence     : ${p.license.name} (${p.license.type})`);
+    console.log(`    Attribution : ${p.license.attributionRequired ? colors.yellow + 'Requise' : colors.green + 'Optionnelle'}${colors.reset}`);
+    const caps = p.getCapabilities();
+    const capList = [
+      caps.search ? 'Recherche API' : null,
+      caps.download ? 'Téléchargement direct' : null,
+      caps.colorCustomization ? 'Colorisation SVG' : null,
+      caps.gradientCustomization ? 'Dégradés' : null,
+      caps.componentComposition ? 'Composition modulaire' : null,
+    ].filter(Boolean).join(', ');
+    console.log(`    Capacités   : ${colors.gray}${capList}${colors.reset}\n`);
+  });
+}
+
+// -------------------------------------------------------------
+// 5. COMMAND: AUDIT (Legal Compliance)
+// -------------------------------------------------------------
+function handleAudit() {
+  const jsonMode = args.includes('--json');
+  const audits = auditLicenses();
+
+  if (jsonMode) {
+    console.log(JSON.stringify(audits, null, 2));
+    return;
+  }
+
+  banner();
+  console.log(`${colors.bold}⚖️ Audit de conformité légale et droits d'utilisation :${colors.reset}\n`);
+
+  audits.forEach((a) => {
+    const icon = a.status === 'approved' ? `${colors.green}✔` : `${colors.yellow}ℹ`;
+    console.log(`  ${icon} ${colors.bold}${a.name}${colors.reset} [${a.status.toUpperCase()}]`);
+    console.log(`     Licence        : ${a.license}`);
+    console.log(`     Download Auto  : ${a.automatedDownloadAllowed ? colors.green + 'AUTORISÉ' : colors.red + 'INTERDIT (Manuel)'}${colors.reset}`);
+    console.log(`     Attribution    : ${a.attributionRequired ? colors.yellow + 'OBLIGATOIRE' : colors.green + 'NON REQUISE'}${colors.reset}`);
+    console.log(`     URL officielle : ${colors.cyan}${a.url}${colors.reset}\n`);
+  });
+}
+
+// -------------------------------------------------------------
+// 6. COMMAND: INSTALL (IDE plugins & skills)
+// -------------------------------------------------------------
 async function handleInstall() {
   banner();
   console.log(`${colors.bold}🔍 Détection des environnements IA...${colors.reset}\n`);
@@ -422,7 +392,7 @@ async function handleInstall() {
     } catch (err) {}
   }
 
-  // 3. Projet local courant (si dans un projet git ou node)
+  // 3. Projet local courant
   const cwd = process.cwd();
   if (path.resolve(cwd) !== path.resolve(PKG_ROOT)) {
     if (fs.existsSync(path.join(cwd, 'package.json')) || fs.existsSync(path.join(cwd, '.git'))) {
@@ -444,71 +414,11 @@ async function handleInstall() {
 
   console.log(`\n${colors.bold}${colors.green}🎉 Installation terminée avec succès ! (${installedCount} environnements configurés)${colors.reset}\n`);
   console.log(`Votre agent IA sait désormais :
+  • Rechercher sur unDraw, Open Peeps, IRA Design avec scoring sémantique
+  • Respecter la conformité légale et les licences (Storyset, DrawKit, ManyPixels)
   • Analyser automatiquement la palette Tailwind / CSS de votre projet
-  • Choisir et noter les meilleures illustrations candidates (Smart Match)
   • Éviter les téléchargements de doublons
-  • Générer des composants React / Next.js prêts à l'emploi avec Dark Mode\n`);
-}
-
-// Command: search
-async function handleSearch() {
-  const query = args[1];
-  if (!query) {
-    console.log(`Usage: npx tidjan-undraw search <keyword>`);
-    return;
-  }
-  banner();
-  console.log(`🔍 Recherche sur unDraw.co pour "${colors.bold}${query}${colors.reset}"...\n`);
-  const results = await searchUndraw(query, 10);
-  if (results.length === 0) {
-    console.log(`${colors.yellow}Aucune illustration trouvée pour "${query}".${colors.reset}`);
-    return;
-  }
-  results.forEach((r, idx) => {
-    console.log(`  ${colors.green}${idx + 1}.${colors.reset} ${colors.bold}${r.title}${colors.reset}`);
-    console.log(`     Slug : ${colors.cyan}${r.newSlug}${colors.reset}`);
-    console.log(`     SVG  : ${r.media}\n`);
-  });
-}
-
-// Command: download
-async function handleDownload() {
-  const query = args[1];
-  const outDir = args[2] || './public/illustrations';
-  const customColor = args[3] || null;
-  const force = args.includes('--force');
-
-  if (!query) {
-    console.log(`Usage: npx tidjan-undraw download <keyword> [output_dir] [hex_color] [--force]`);
-    return;
-  }
-  banner();
-  console.log(`⬇️ Recherche et téléchargement pour "${query}"...`);
-  const results = await searchUndraw(query, 1);
-  if (results.length === 0) {
-    console.log(`${colors.yellow}Aucune illustration trouvée.${colors.reset}`);
-    return;
-  }
-  const item = results[0];
-  const filename = `${item.newSlug}.svg`;
-  const target = path.join(outDir, filename);
-
-  // Auto-detect project color if not provided
-  const ctx = detectProjectContext();
-  const color = customColor || ctx.primaryColor;
-
-  try {
-    const dl = await downloadSvg(item.media, target, color, ctx.hasDarkMode, force);
-    if (dl.cached) {
-      console.log(`${colors.yellow}✔ [Anti-doublon] SVG déjà en cache local :${colors.reset} ${target}`);
-      console.log(`  (Utilisez --force pour forcer le retéléchargement)`);
-    } else {
-      console.log(`${colors.green}✔ SVG téléchargé :${colors.reset} ${target}`);
-      console.log(`${colors.green}✔ Couleur appliquée :${colors.reset} ${color} ${colors.gray}(${ctx.colorSource})${colors.reset}`);
-    }
-  } catch (err) {
-    console.error(`${colors.red}Erreur :${colors.reset}`, err.message);
-  }
+  • Générer des composants React, Next.js, Vue 3, Svelte, Flutter prêts à l'emploi\n`);
 }
 
 // Router
@@ -523,6 +433,14 @@ switch (command) {
   case 'download':
   case 'get':
     handleDownload();
+    break;
+  case 'providers':
+  case '--list-providers':
+    handleProviders();
+    break;
+  case 'audit':
+  case '--audit-licenses':
+    handleAudit();
     break;
   case 'install':
   default:

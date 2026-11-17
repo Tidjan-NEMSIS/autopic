@@ -1,21 +1,26 @@
 ---
 name: undraw
 description: >-
-  Smart unDraw SVG illustration skill with automatic CSS/Tailwind brand palette
-  detection, candidate ranking, anti-duplicate caching, dark mode adaptation,
-  and React/Next.js component generation.
+  Universal multi-provider SVG illustration skill (unDraw, Open Peeps CC0, IRA Design MIT) with automatic CSS/Tailwind brand palette detection, candidate ranking, anti-duplicate caching, dark mode adaptation, and React/Next.js/Vue/Svelte/Flutter component generation.
 ---
 
-# unDraw SVG Illustrations Skill (v1.1.0 Smart Match)
+# Universal Multi-Provider Illustration Skill (v2.0)
 
 ## Overview
 
-[unDraw](https://undraw.co) is a curated collection of 600+ open-source SVG illustrations by Katerina Limpitsouni.
-The **tidjan-undraw** plugin empowers the AI agent to:
-1. **Analyze visual context**: Automatically extract the project's primary brand color from `tailwind.config.*` or CSS variables (`--primary`).
-2. **Smart-rank candidates**: Search and score multiple illustrations, picking the most semantically fitting one.
-3. **Anti-duplicate caching**: Prevent redundant downloads by inspecting existing assets in `./public/illustrations`.
-4. **Dark / Light adaptation**: Soften charcoal tones for dark mode and produce accessible responsive components.
+**tidjan-undraw** is an intelligent, multi-provider illustration engine for AI coding agents.
+Supported providers:
+- **unDraw** (`undraw`): Flat modern illustrations (Approved)
+- **Open Peeps** (`openpeeps`): Hand-drawn vector characters & avatars (CC0 1.0 Public Domain, Approved)
+- **IRA Design** (`iradesign`): Tech & gradient illustrations (MIT License, Approved)
+- **Storyset / DrawKit / ManyPixels**: Full legal compliance mode (`manual_only`) with official URLs & attribution snippets.
+
+The engine empowers the AI agent to:
+1. **Analyze visual & semantic context**: Automatically extract component type, mood, domain, style, and brand colors from `tailwind.config.*` or CSS variables (`--primary`).
+2. **Multi-criteria ranking (0-100)**: Score candidates across semantic fit, component match, style harmony, palette, and licensing.
+3. **Multi-framework code generation**: Generates typed, responsive components for **React**, **Next.js**, **Vue 3 SFC**, **Svelte**, **Flutter**, or **HTML**.
+4. **Anti-duplicate caching**: Prevent redundant downloads by inspecting SHA256 hashes in `./public/illustrations`.
+5. **Dark mode adaptation & SVG sanitization**: Adjust charcoal tones for dark UI and remove dangerous script tags.
 
 ---
 
@@ -27,48 +32,42 @@ Whenever a user asks for an illustration, error page (404), empty state, hero se
 npx tidjan-undraw smart "<concept or page description>"
 ```
 
-### What `smart` executes automatically:
-- 🎨 **Palette detection**: Detects `#HEX` code from Tailwind/CSS without asking the user.
-- 🎯 **Candidate scoring**: Finds top 5 illustrations and computes semantic fit.
-- ⬇️ **Download & Colorize**: Replaces `#6C63FF` with the detected brand color.
-- ⚛️ **Component creation**: Emits a typed Next.js / React component in `components/illustrations/`.
+### Advanced Options:
+```bash
+# Specific provider (e.g. openpeeps for avatars/characters)
+npx tidjan-undraw smart "user profile" --provider openpeeps
+
+# Target framework override
+npx tidjan-undraw smart "dashboard analytics" --framework vue
+
+# Custom color & forced dark mode
+npx tidjan-undraw smart "payment success" --color "#10B981" --dark
+
+# JSON mode for direct agent parsing
+npx tidjan-undraw smart "page 404" --json
+```
 
 ---
 
 ## 🛠️ Individual CLI Commands
 
 ```bash
-# 1. Search illustrations
-npx tidjan-undraw search "<query>"
+# 1. Multi-provider search with ranking scores
+npx tidjan-undraw search "<query>" [--provider <id>] [--json]
 
-# 2. Download with automatic brand color detection & anti-duplicate
-npx tidjan-undraw download "<query>" ./public/illustrations
+# 2. List registered providers and their capabilities
+npx tidjan-undraw providers
 
-# 3. Force overwrite existing file
-npx tidjan-undraw download "<query>" ./public/illustrations "#3B82F6" --force
+# 3. Audit legal compliance of all providers
+npx tidjan-undraw audit
 
-# 4. Smart match with custom color override
-npx tidjan-undraw smart "dashboard analytics" --color "#10B981"
+# 4. Download directly with anti-duplicate prevention
+npx tidjan-undraw download "<query>" ./public/illustrations [--provider <id>] [--force]
 ```
 
 ---
 
-## 📁 Generated Component Pattern
+## ⚖️ Legal Compliance Rules
 
-```tsx
-// components/illustrations/NotFoundIllustration.tsx
-import Image from 'next/image';
-import React from 'react';
-
-export const NotFoundIllustration = ({ width = 400, height = 300, className = '' }) => (
-  <div className={`relative inline-block ${className}`}>
-    <Image
-      src="/illustrations/page-not-found.svg"
-      alt="Not found"
-      width={width}
-      height={height}
-      className="w-full h-auto object-contain dark:brightness-110"
-    />
-  </div>
-);
-```
+- **Approved Providers (`undraw`, `openpeeps`, `iradesign`)**: Automated search, download, and customization are allowed.
+- **Manual-Only Providers (`storyset`, `drawkit`, `manypixels`)**: Terms of use forbid scraping/automated mass downloading. When a user requests illustrations from these providers, provide the official search link and the required attribution notice without attempting automated scraping.

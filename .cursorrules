@@ -1,6 +1,7 @@
-# Cursor Rules for unDraw Illustrations (v1.1.0)
+# Cursor Rules for tidjan-undraw
 
-When creating UI components that need illustrations (empty states, 404, onboarding, heroes):
-1. Run `npx tidjan-undraw smart "<concept>"` to automatically detect brand colors from Tailwind/CSS, rank candidate illustrations, download SVG, and generate components.
-2. Anti-duplicate caching is active: existing SVGs are preserved unless `--force` is used.
-3. Dark mode adaptation is built-in.
+When designing or integrating UI components needing illustrations:
+1. Use `npx tidjan-undraw smart "<concept>"` to automatically select, colorize, and integrate illustrations.
+2. Supports multi-providers: `undraw`, `openpeeps`, and `iradesign`.
+3. Auto-detects Tailwind & CSS `--primary` color variables and dark mode.
+4. Generates typed components for React, Next.js, Vue 3, Svelte, and Flutter.

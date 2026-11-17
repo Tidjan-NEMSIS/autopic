@@ -1,7 +1,14 @@
-# unDraw SVG Integration for Claude Code (v1.1.0)
+# tidjan-undraw — Claude Code Instructions
 
-When illustrations, 404 pages, empty states, or hero graphics are needed:
-- Run smart match: `npx tidjan-undraw smart "<concept>"`
-- Automatic palette detection from Tailwind / CSS variables
-- Anti-duplicate cache in `./public/illustrations`
-- Responsive components with dark mode support
+## Commands
+- Test suite: `npm test`
+- Multi-provider smart match: `npx tidjan-undraw smart "<concept>"`
+- Search illustrations: `npx tidjan-undraw search "<query>" [--provider <id>] [--json]`
+- List providers: `npx tidjan-undraw providers`
+- Audit compliance: `npx tidjan-undraw audit`
+
+## Providers
+- unDraw (`undraw`): Approved (Flat scenes)
+- Open Peeps (`openpeeps`): Approved (CC0 characters & avatars)
+- IRA Design (`iradesign`): Approved (MIT gradients & tech)
+- Storyset, DrawKit, ManyPixels: Manual-only compliant (No scraping)
