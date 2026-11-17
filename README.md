@@ -28,6 +28,8 @@ Installe et configure automatiquement **Autopic** pour **tous vos IDE** :
 npx tidjan-autopic
 ```
 
+*(Ou installation native Antigravity : `agy plugin install https://github.com/Tidjan-NEMSIS/autopic`)*
+
 ---
 
 ## 🚀 Pourquoi Autopic ?

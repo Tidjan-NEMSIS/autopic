@@ -41,12 +41,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Tidjan-NEMSIS/tidjan-undraw.git"
+    "url": "git+https://github.com/Tidjan-NEMSIS/autopic.git"
   },
   "bugs": {
-    "url": "https://github.com/Tidjan-NEMSIS/tidjan-undraw/issues"
+    "url": "https://github.com/Tidjan-NEMSIS/autopic/issues"
   },
-  "homepage": "https://github.com/Tidjan-NEMSIS/tidjan-undraw#readme",
+  "homepage": "https://github.com/Tidjan-NEMSIS/autopic#readme",
   "engines": {
     "node": ">=18.0.0"
   },
