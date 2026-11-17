@@ -1,9 +1,9 @@
 {
   "$schema": "https://antigravity.google/schemas/v1/plugin.json",
-  "name": "tidjan-undraw",
-  "displayName": "tidjan-undraw (unDraw SVG for AI)",
-  "description": "Universal unDraw SVG illustration plugin by Tidjan. Smart Match context analysis, auto-palette detection (Tailwind/CSS), anti-duplicate caching and multi-IDE support.",
-  "version": "1.1.0",
+  "name": "autopik",
+  "displayName": "Autopik — Intelligent Multi-Provider Illustration Platform",
+  "description": "Universal multi-provider illustration platform by Tidjan Sow (unDraw, Open Peeps, IRA Design, Storyset, DrawKit, ManyPixels). Smart Match context analysis, auto-palette detection (Tailwind/CSS), anti-duplicate caching and multi-framework generation.",
+  "version": "2.0.0",
   "author": {
     "name": "Tidjan Sow",
     "url": "https://github.com/Tidjan-NEMSIS"
@@ -15,8 +15,8 @@
   },
   "logo": "assets/logo.svg",
   "suggestedPrompts": [
-    "Smart-match an unDraw illustration for a 404 error page with my brand color",
-    "Add an unDraw hero illustration about teamwork with dark mode support",
-    "Search unDraw for illustrations related to 'data analytics' and create a React component"
+    "Smart-match an illustration for a 404 error page using Autopik with my brand color",
+    "Find an avatar character on Open Peeps with my project palette",
+    "Integrate an IRA Design tech illustration with custom gradients into Next.js"
   ]
 }

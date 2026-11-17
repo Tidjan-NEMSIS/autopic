@@ -1,6 +1,6 @@
 {
-  "name": "tidjan-undraw",
-  "version": "1.0.0",
-  "description": "unDraw SVG illustration extension for Gemini CLI by Tidjan",
+  "name": "autopik",
+  "version": "2.0.0",
+  "description": "Autopik — Universal multi-provider illustration extension for Gemini CLI by Tidjan Sow",
   "author": "Tidjan Sow"
 }

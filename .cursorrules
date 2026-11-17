@@ -1,7 +1,7 @@
-# Cursor Rules for tidjan-undraw
+# Cursor Rules for Autopik (tidjan-autopik)
 
 When designing or integrating UI components needing illustrations:
-1. Use `npx tidjan-undraw smart "<concept>"` to automatically select, colorize, and integrate illustrations.
+1. Use `npx tidjan-autopik smart "<concept>"` to automatically select, colorize, and integrate illustrations.
 2. Supports multi-providers: `undraw`, `openpeeps`, and `iradesign`.
 3. Auto-detects Tailwind & CSS `--primary` color variables and dark mode.
 4. Generates typed components for React, Next.js, Vue 3, Svelte, and Flutter.

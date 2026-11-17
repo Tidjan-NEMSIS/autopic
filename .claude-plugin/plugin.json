@@ -1,7 +1,7 @@
 {
-  "name": "tidjan-undraw",
-  "description": "unDraw SVG illustration integration for Claude Code by Tidjan. Search, download, colorize, and auto-integrate 600+ illustrations.",
-  "version": "1.0.0",
+  "name": "autopik",
+  "description": "Autopik — Universal multi-provider illustration platform by Tidjan Sow (unDraw, Open Peeps, IRA Design, Storyset, DrawKit, ManyPixels). Search, smart-match, colorize, and auto-generate components for React, Next.js, Vue, Svelte, and Flutter.",
+  "version": "2.0.0",
   "author": {
     "name": "Tidjan Sow",
     "url": "https://github.com/Tidjan-NEMSIS"

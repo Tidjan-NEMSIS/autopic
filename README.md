@@ -1,11 +1,11 @@
 <div align="center">
 
-# 🎨 tidjan-undraw v2.0
+# 🎯 Autopik v2.0
 
-**Universal Multi-Provider Illustration Platform & CLI for AI Coding Agents**  
+**Intelligent Multi-Provider Illustration Platform & CLI for AI Coding Agents**  
 *Google Antigravity IDE • Claude Code • Cursor • Windsurf • DeepSeek IDE*
 
-[![npm version](https://img.shields.io/npm/v/tidjan-undraw.svg?style=for-the-badge&color=CB3837&logo=npm)](https://www.npmjs.com/package/tidjan-undraw)
+[![npm version](https://img.shields.io/npm/v/tidjan-autopik.svg?style=for-the-badge&color=CB3837&logo=npm)](https://www.npmjs.com/package/tidjan-autopik)
 [![Tests Passing](https://img.shields.io/badge/Tests-40%2F40%20Pass-brightgreen?style=for-the-badge&logo=node.js)](https://nodejs.org)
 [![Zero Dependencies](https://img.shields.io/badge/Dependencies-0%20External-blue?style=for-the-badge)](package.json)
 [![Antigravity](https://img.shields.io/badge/Antigravity-v2.0_Ready-6C63FF?style=for-the-badge&logo=google)](https://antigravity.google)
@@ -14,7 +14,7 @@
 <br/>
 
 <!-- ANIMATED DEMO MOCKUP -->
-<img src="assets/demo.svg" alt="tidjan-undraw Multi-Provider Smart Match Demo" width="100%" />
+<img src="assets/demo.svg" alt="Autopik Multi-Provider Smart Match Demo" width="100%" />
 
 </div>
 
@@ -22,19 +22,19 @@
 
 ## ⚡ Quick Start (1 commande universelle)
 
-Installe et configure automatiquement le moteur intelligent pour **tous vos IDE** :
+Installe et configure automatiquement **Autopik** pour **tous vos IDE** :
 
 ```bash
-npx tidjan-undraw
+npx tidjan-autopik
 ```
 
-*(Ou installation native Antigravity : `agy plugin install https://github.com/Tidjan-NEMSIS/tidjan-undraw`)*
+*(Ou via l'alias court : `npx autopik`)*
 
 ---
 
-## 🚀 Nouvelle Vision v2.0 : Moteur Multi-Fournisseurs Intelligent
+## 🚀 Pourquoi Autopik ?
 
-Tidjan-Undraw n'est plus un simple connecteur unitaire. C'est désormais un **moteur intelligent, modulaire et conforme au droit d'auteur**, capable d'analyser le contexte d'une interface, d'interroger plusieurs catalogues d'illustrations réputés, de calculer un score de pertinence multi-critères, et de générer directement les composants dans votre framework cible (React, Next.js, Vue 3, Svelte, Flutter).
+**Autopik** (« Auto-Pick ») est un **moteur intelligent, modulaire et conforme au droit d'auteur**, capable de comprendre le contexte d'une interface, d'interroger plusieurs catalogues d'illustrations de référence (unDraw, Open Peeps, IRA Design, Storyset, DrawKit, ManyPixels), de calculer un score de pertinence multi-critères, et de générer instantanément les composants dans votre framework cible (**React**, **Next.js**, **Vue 3**, **Svelte**, **Flutter**).
 
 ### 🏛️ Matrice des Fournisseurs
 
@@ -48,11 +48,11 @@ Tidjan-Undraw n'est plus un simple connecteur unitaire. C'est désormais un **mo
 | **ManyPixels** | ⚖️ Manual Only | ManyPixels License | Conformité stricte (Recherche guidée) | Monochromatic, Two-color, Isometric |
 
 > [!IMPORTANT]
-> **Éthique & Conformité Stricte** : Storyset, DrawKit et ManyPixels interdisent explicitement le scraping ou la redistribution automatisée en masse dans leurs CGU. Conformément aux règles d'ingénierie responsable, Tidjan-Undraw applique le statut `manual_only` pour ces fournisseurs : il fournit les liens officiels de recherche et les snippets d'attribution légale obligatoires sans jamais contourner les protections techniques.
+> **Éthique & Conformité Stricte** : Storyset, DrawKit et ManyPixels interdisent explicitement le scraping ou la redistribution automatisée en masse dans leurs CGU. Conformément aux règles d'ingénierie responsable, Autopik applique le statut `manual_only` pour ces fournisseurs : il fournit les liens officiels de recherche et les snippets d'attribution légale obligatoires sans jamais contourner les protections techniques.
 
 ---
 
-## 🧠 Les 6 Moteurs Cœurs
+## 🧠 Les 6 Moteurs Cœurs d'Autopik
 
 1. **`SearchEngine` (Analyseur Sémantique Contextuel)** :
    - Détecte automatiquement le composant cible (`auth`, `404`, `empty`, `hero`, `team`, `dashboard`).
@@ -81,40 +81,40 @@ Tidjan-Undraw n'est plus un simple connecteur unitaire. C'est désormais un **mo
 Analyse le projet, évalue les candidats des catalogues approuvés et génère le composant clé en main :
 ```bash
 # Recherche multi-catalogue intelligente
-npx tidjan-undraw smart "page not found"
+npx tidjan-autopik smart "page not found"
 
 # Spécifier un fournisseur (ex: Open Peeps pour un personnage)
-npx tidjan-undraw smart "secure login" --provider openpeeps
+npx tidjan-autopik smart "secure login" --provider openpeeps
 
 # Forcer un framework et une couleur
-npx tidjan-undraw smart "analytics dashboard" --framework vue --color "#3B82F6"
+npx tidjan-autopik smart "analytics dashboard" --framework vue --color "#3B82F6"
 
 # Forcer le mode sombre et écraser si existant
-npx tidjan-undraw smart "server crash" --dark --force
+npx tidjan-autopik smart "server crash" --dark --force
 ```
 
 ### 2. 🔍 Recherche & Mode JSON pour Agents IA
 ```bash
 # Recherche avec scores de pertinence
-npx tidjan-undraw search "teamwork"
+npx tidjan-autopik search "teamwork"
 
 # Sortie structurée JSON consommable par les agents IA
-npx tidjan-undraw search "payment" --json
+npx tidjan-autopik search "payment" --json
 ```
 
 ### 3. 📦 Liste des Fournisseurs & Capacités
 ```bash
-npx tidjan-undraw providers
+npx tidjan-autopik providers
 ```
 
 ### 4. ⚖️ Audit Légal de Conformité
 ```bash
-npx tidjan-undraw audit
+npx tidjan-autopik audit
 ```
 
 ### 5. ⬇️ Téléchargement Direct
 ```bash
-npx tidjan-undraw download "launch rocket" ./public/illustrations --provider iradesign
+npx tidjan-autopik download "launch rocket" ./public/illustrations --provider iradesign
 ```
 
 ---
@@ -123,7 +123,7 @@ npx tidjan-undraw download "launch rocket" ./public/illustrations --provider ira
 
 Installez le package dans votre projet :
 ```bash
-npm install tidjan-undraw
+npm install tidjan-autopik
 ```
 
 Utilisez l'API typée :
@@ -133,7 +133,7 @@ import {
   integrateIllustration,
   auditLicenses,
   getProviders
-} from 'tidjan-undraw';
+} from 'tidjan-autopik';
 
 // 1. Recherche sémantique multi-fournisseurs avec scoring
 const results = await searchIllustrations('connexion sécurisée', {

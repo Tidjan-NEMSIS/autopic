@@ -1,10 +1,12 @@
 {
-  "name": "tidjan-undraw",
+  "name": "tidjan-autopik",
   "version": "2.0.0",
-  "description": "Universal Multi-Provider Illustration Platform & CLI for AI Coding Agents (unDraw, Open Peeps, IRA Design, Storyset, DrawKit, ManyPixels)",
+  "description": "Autopik — Universal Multi-Provider Illustration Platform & CLI for AI Coding Agents (unDraw, Open Peeps, IRA Design, Storyset, DrawKit, ManyPixels)",
   "main": "src/index.js",
   "types": "src/index.d.ts",
   "bin": {
+    "autopik": "bin/cli.js",
+    "tidjan-autopik": "bin/cli.js",
     "tidjan-undraw": "bin/cli.js",
     "tdj-undraw": "bin/cli.js"
   },
