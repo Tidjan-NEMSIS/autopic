@@ -83,8 +83,8 @@
     <!-- Command Prompt -->
     <text x="0" y="0" fill="#10b981" font-weight="bold">➜</text>
     <text x="20" y="0" fill="#38bdf8" font-weight="bold">my-nextjs-app</text>
-    <text x="135" y="0" fill="#f1f5f9">npx tidjan-autopic smart "404"</text>
-    <rect x="350" y="-12" width="8" height="15" fill="#a855f7" class="cursor"/>
+    <text x="135" y="0" fill="#f1f5f9">npx tidjan-autopic smart "empty wallet"</text>
+    <rect x="440" y="-12" width="8" height="15" fill="#a855f7" class="cursor"/>
 
     <!-- Step 1: Project Inspection -->
     <g class="step1" transform="translate(0, 32)">
@@ -92,43 +92,43 @@
       <text x="130" y="0" fill="#cbd5e1">Inspection du projet en cours...</text>
       <text x="20" y="22" fill="#64748b">├── Framework  :</text>
       <text x="165" y="22" fill="#38bdf8" font-weight="bold">Next.js 16 (App Router + TS)</text>
-      <text x="20" y="42" fill="#64748b">├── Palette    :</text>
-      <text x="165" y="42" fill="#f43f5e" font-weight="bold">#3B82F6</text>
-      <text x="240" y="42" fill="#94a3b8">(tailwind.config.ts)</text>
-      <text x="20" y="62" fill="#64748b">└── Providers  :</text>
-      <text x="165" y="62" fill="#a855f7" font-weight="bold">unDraw • Open Peeps • IRA Design</text>
+      <text x="20" y="42" fill="#64748b">├── Composant  :</text>
+      <text x="165" y="42" fill="#f43f5e" font-weight="bold">empty-state (billing / wallet)</text>
+      <text x="20" y="62" fill="#64748b">└── Palette    :</text>
+      <text x="165" y="62" fill="#3b82f6" font-weight="bold">#3B82F6</text>
+      <text x="235" y="62" fill="#94a3b8">(tailwind.config.ts)</text>
     </g>
 
     <!-- Step 2: Scoring Candidate Illustrations -->
     <g class="step2" transform="translate(0, 125)">
       <text x="0" y="0" fill="#f59e0b" font-weight="bold">🎯 [Candidats]</text>
       <text x="125" y="0" fill="#cbd5e1">Scoring sémantique multi-sources :</text>
-      <text x="20" y="22" fill="#94a3b8">1. Page not found</text>
-      <text x="180" y="22" fill="#10b981">[unDraw - 98% match]</text>
+      <text x="20" y="22" fill="#94a3b8">1. Empty Wallet</text>
+      <text x="190" y="22" fill="#10b981">[unDraw - 95% match]</text>
       <text x="20" y="42" fill="#94a3b8">2. Sitting Confused</text>
-      <text x="180" y="42" fill="#64748b">[OpenPeeps - 88% CC0]</text>
-      <text x="20" y="62" fill="#94a3b8">3. Server Error</text>
-      <text x="180" y="62" fill="#64748b">[IRADesign - 82% MIT]</text>
+      <text x="190" y="42" fill="#64748b">[OpenPeeps - 77% CC0]</text>
+      <text x="20" y="62" fill="#94a3b8">3. Financial Loss</text>
+      <text x="190" y="62" fill="#64748b">[IRADesign - 70% MIT]</text>
     </g>
 
     <!-- Step 3: Generation & Anti-duplicate -->
     <g class="step3" transform="translate(0, 218)">
       <text x="0" y="0" fill="#10b981" font-weight="bold">✨ [Génération]</text>
       <text x="130" y="0" fill="#f1f5f9">Choix retenu :</text>
-      <text x="250" y="0" fill="#38bdf8" font-weight="bold">page-not-found_6wni</text>
+      <text x="250" y="0" fill="#38bdf8" font-weight="bold">empty-wallet_j0kn</text>
       <text x="20" y="22" fill="#10b981">✔ SVG téléchargé  :</text>
-      <text x="180" y="22" fill="#cbd5e1">public/illustrations/page-not-found_6wni.svg</text>
+      <text x="180" y="22" fill="#cbd5e1">public/illustrations/empty-wallet_j0kn.svg</text>
       <text x="20" y="42" fill="#10b981">✔ Auto-Palette    :</text>
       <text x="180" y="42" fill="#3b82f6" font-weight="bold">#3B82F6</text>
       <text x="250" y="42" fill="#94a3b8">(remplace #6C63FF)</text>
       <text x="20" y="62" fill="#10b981">✔ Composant React :</text>
-      <text x="180" y="62" fill="#cbd5e1">components/illustrations/PageNotFound.tsx</text>
+      <text x="180" y="62" fill="#cbd5e1">components/illustrations/EmptyWallet.tsx</text>
     </g>
 
     <!-- Step 4: Ready -->
     <g class="step4" transform="translate(0, 310)">
       <rect x="0" y="-8" width="505" height="28" rx="6" fill="#064e3b" stroke="#10b981" stroke-width="1"/>
-      <text x="12" y="11" fill="#6ee7b7" font-weight="bold">🚀 Prêt ! Intégré dans app/not-found.tsx avec Dark Mode</text>
+      <text x="12" y="11" fill="#6ee7b7" font-weight="bold">🚀 Prêt ! Intégré dans components/billing/EmptyWallet.tsx</text>
     </g>
   </g>
 
@@ -137,19 +137,28 @@
     <rect width="210" height="235" rx="10" fill="#0f172a" stroke="#4338ca" stroke-width="1.5" filter="url(#shadow)"/>
     <text x="105" y="24" fill="#a5b4fc" font-size="11" text-anchor="middle" class="ui-font" font-weight="600">Aperçu Intégré</text>
     
-    <!-- Mini SVG Representation -->
-    <g transform="translate(30, 45)">
-      <!-- Monitor -->
-      <rect x="25" y="15" width="100" height="70" rx="6" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
-      <rect x="32" y="22" width="86" height="56" rx="3" fill="#0f172a"/>
-      <path d="M75 85 v20 M60 105 h30" stroke="#64748b" stroke-width="3" stroke-linecap="round"/>
+    <!-- Mini SVG Representation: Empty Wallet in brand color -->
+    <g transform="translate(25, 45)">
+      <!-- Back card in pocket -->
+      <rect x="35" y="15" width="90" height="30" rx="4" fill="#3B82F6" opacity="0.85"/>
+      <line x1="45" y1="23" x2="75" y2="23" stroke="#ffffff" stroke-width="2" opacity="0.9"/>
       
-      <!-- Screen 404 & Person in project primary color (#3B82F6) -->
-      <text x="75" y="55" fill="#3B82F6" font-size="20" font-weight="900" text-anchor="middle" class="ui-font">404</text>
-      <circle cx="120" cy="85" r="12" fill="#fbcfe8"/>
-      <path d="M110 105 c0 -15 20 -15 20 0 z" fill="#3B82F6"/>
-      <circle cx="40" cy="40" r="4" fill="#3B82F6" opacity="0.6"/>
-      <circle cx="108" cy="30" r="3" fill="#a855f7" opacity="0.6"/>
+      <!-- Wallet main body -->
+      <rect x="25" y="28" width="110" height="75" rx="10" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+      <!-- Inner texture / stitches -->
+      <path d="M25 42 Q80 52 135 42" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="3,3"/>
+      
+      <!-- Wallet flap & clasp with primary color -->
+      <path d="M105 52 h26 a8 8 0 0 1 8 8 v8 a8 8 0 0 1 -8 8 h-26 z" fill="#3B82F6"/>
+      <circle cx="127" cy="64" r="3.5" fill="#ffffff"/>
+      
+      <!-- Empty zero coin -->
+      <circle cx="55" cy="65" r="15" fill="#0f172a" stroke="#3B82F6" stroke-width="2" stroke-dasharray="4,2"/>
+      <text x="55" y="70" fill="#3B82F6" font-size="13" font-weight="800" text-anchor="middle" class="ui-font">0€</text>
+      
+      <!-- Wind / emptiness decorative dashes -->
+      <path d="M15 78 Q22 72 32 76" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+      <path d="M130 20 Q138 15 145 18" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" fill="none"/>
     </g>
 
     <!-- Badge in Card -->
