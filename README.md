@@ -13,8 +13,19 @@
 
 <br/>
 
-<!-- ANIMATED DEMO MOCKUP -->
-<img src="assets/demo.svg" alt="Autopic Multi-Provider Smart Match Demo" width="100%" />
+<!-- ANIMATED DEMO MOCKUPS -->
+<p align="center">
+  <b>Case 1 : Empty State (ex: <i>"empty wallet"</i>)</b><br/>
+  <img src="assets/demo.svg" alt="Autopic Multi-Provider Smart Match Demo - Empty Wallet" width="100%" />
+</p>
+
+<details open>
+<summary><b>🎬 Case 2 : Page d'erreur & 404 (ex: <i>"page 404"</i>)</b> <i>(cliquez pour afficher / masquer)</i></summary>
+<br/>
+<p align="center">
+  <img src="assets/demo-404.svg" alt="Autopic Multi-Provider Smart Match Demo - Page 404" width="100%" />
+</p>
+</details>
 
 </div>
 
